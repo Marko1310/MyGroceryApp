@@ -8,9 +8,12 @@ function App() {
   return (
     <div>
       <Navbar />
-      <Alert />
-      <Submit />
-      <List />
+      <div className="main-container">
+        <Alert />
+        <Submit />
+        <List />
+      </div>
+
       {/* <div className="section-center"></div>;
       <div className="section-center"></div>; */}
     </div>
