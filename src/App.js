@@ -16,11 +16,17 @@ function App() {
     setInput(e.target.value);
   };
 
+  // function to add groceries
   const addGrocerie = function () {
     setGrocerieList((prevGrocerieList) => {
       return [...prevGrocerieList, input];
     });
     setInput("");
+  };
+
+  // function to remove all groceries
+  const emptyList = function () {
+    setGrocerieList([]);
   };
 
   return (
@@ -33,7 +39,7 @@ function App() {
           addGrocerie={addGrocerie}
           input={input}
         />
-        <List />
+        <List grocerieList={grocerieList} emptyList={emptyList} />
       </div>
 
       {/* <div className="section-center"></div>;

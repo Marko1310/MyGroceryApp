@@ -208,6 +208,7 @@ Grocery List
   max-width: 30rem;
   display: flex;
   flex-direction: row;
+  margin-bottom: 2rem;
 }
 
 .submit-input {
@@ -289,7 +290,6 @@ Grocery List
   flex-direction: row;
   width: 100%;
   justify-content: space-between;
-  margin-bottom: 1rem;
   margin-top: 1rem;
   transition: var(--transition);
   padding-top: 0.5rem;
