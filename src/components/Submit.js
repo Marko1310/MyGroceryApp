@@ -1,10 +1,10 @@
-const Submit = () => {
+const Submit = ({ changeInput, addGrocerie, input }) => {
   return (
     <form
       className="submit-container"
       onSubmit={(e) => {
         e.preventDefault();
-        console.log(e.target[0].value, e.target[1].value);
+        addGrocerie();
       }}
     >
       <input
@@ -12,7 +12,9 @@ const Submit = () => {
         id="grocery"
         name="grocery"
         placeholder="e.g. banana"
+        value={input}
         className="submit-input"
+        onChange={(e) => changeInput(e)}
       ></input>
       <input type="submit" value="Submit" className="submit-btn"></input>
     </form>
