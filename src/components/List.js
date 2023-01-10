@@ -1,17 +1,22 @@
 import React from "react";
-const List = ({ grocerieList, emptyList }) => {
+
+const List = ({ grocerieList, deleteItem, emptyList }) => {
+  const { title, id } = grocerieList;
   return (
     <div className="grocery-list-container">
       {grocerieList.map((grocerie) => {
-        // const id = new Date().getTime().toString();
-        const id = Math.random();
         return (
-          <ul key={id}>
+          <ul key={grocerie.id}>
             <li className="grocery-list-item">
-              <div>{grocerie}</div>
+              <div>{grocerie.title}</div>
               <div className="submit-buttons">
                 <button className="submit-btn edit">Confirm</button>
-                <button className="submit-btn delete">Delete</button>
+                <button
+                  className="submit-btn delete"
+                  onClick={() => deleteItem(grocerie.id)}
+                >
+                  Delete
+                </button>
               </div>
             </li>
           </ul>

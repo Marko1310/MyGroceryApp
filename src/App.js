@@ -18,8 +18,10 @@ function App() {
 
   // function to add groceries
   const addGrocerie = function () {
+    const id = Math.random();
+
     setGrocerieList((prevGrocerieList) => {
-      return [...prevGrocerieList, input];
+      return [...prevGrocerieList, { title: input, id: id }];
     });
     setInput("");
   };
@@ -27,6 +29,11 @@ function App() {
   // function to remove all groceries
   const emptyList = function () {
     setGrocerieList([]);
+  };
+
+  // function to delete item
+  const deleteItem = function (id) {
+    setGrocerieList(grocerieList.filter((el) => el.id !== id));
   };
 
   return (
@@ -39,7 +46,11 @@ function App() {
           addGrocerie={addGrocerie}
           input={input}
         />
-        <List grocerieList={grocerieList} emptyList={emptyList} />
+        <List
+          grocerieList={grocerieList}
+          deleteItem={deleteItem}
+          emptyList={emptyList}
+        />
       </div>
 
       {/* <div className="section-center"></div>;
