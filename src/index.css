@@ -191,14 +191,10 @@ Grocery List
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  border-style: solid;
-  border-color: green;
-
   width: 90vw;
   margin: 0 auto;
   max-width: 35rem;
   margin-top: 4rem;
-
   background: var(--clr-white);
   border-radius: var(--radius);
   box-shadow: var(--light-shadow);
@@ -210,7 +206,6 @@ Grocery List
   width: 50vw;
   margin: 0 auto;
   max-width: 30rem;
-  /* margin-top: 8rem; */
   display: flex;
   flex-direction: row;
 }
@@ -230,6 +225,9 @@ Grocery List
 .submit-buttons {
   display: flex;
   flex-direction: row;
+  width: 9rem;
+  justify-content: end;
+  gap: 0.5rem;
 }
 
 .submit-btn {
@@ -270,6 +268,15 @@ Grocery List
   background-color: var(--clr-red-dark);
 }
 
+.grocery-list-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50vw;
+  margin: 0 auto;
+  max-width: 30rem;
+}
+
 .grocery-list {
   display: flex;
   flex-direction: column;
@@ -287,20 +294,36 @@ Grocery List
   transition: var(--transition);
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
+  padding-left: 1rem;
 }
 
 .grocery-list-item:hover {
   color: var(--clr-grey-5);
   background: var(--clr-grey-10);
 }
+
 .grocery-list-item:hover .title {
   color: var(--clr-grey-5);
 }
 
-.grocery-list-container {
-  width: 50vw;
+.clear-btn {
+  text-transform: capitalize;
+  height: 1.5rem;
+  display: grid;
+  align-items: center;
+  background: transparent;
+  border-color: transparent;
+  color: var(--clr-red-light);
   margin: 0 auto;
-  max-width: 30rem;
+  font-size: 0.85rem;
+  letter-spacing: var(--spacing);
+  cursor: pointer;
+  transition: var(--transition);
+  margin-top: 1.25rem;
+}
+
+.clear-btn:hover {
+  color: var(--clr-red-dark);
 }
 
 .section-center {
@@ -393,24 +416,5 @@ Grocery List
   color: var(--clr-red-light);
 }
 .delete-btn:hover {
-  color: var(--clr-red-dark);
-}
-.clear-btn {
-  text-transform: capitalize;
-  width: 10rem;
-  height: 1.5rem;
-  display: grid;
-  align-items: center;
-  background: transparent;
-  border-color: transparent;
-  color: var(--clr-red-light);
-  margin: 0 auto;
-  font-size: 0.85rem;
-  letter-spacing: var(--spacing);
-  cursor: pointer;
-  transition: var(--transition);
-  margin-top: 1.25rem;
-}
-.clear-btn:hover {
   color: var(--clr-red-dark);
 }
