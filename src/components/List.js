@@ -1,26 +1,31 @@
 import React from "react";
 
-const List = ({
-  grocerieList,
-  deleteItem,
-  emptyList,
-  isEditing,
-  changeEdit,
-}) => {
-  const { title, id } = grocerieList;
+const List = ({ grocerieList, deleteItem, emptyList, changeEdit }) => {
+  const { title, id, edit } = grocerieList;
   return (
     <div className="grocery-list-container">
       {grocerieList.map((grocerie) => {
         return (
           <ul key={grocerie.id}>
             <li className="grocery-list-item">
-              <div>{grocerie.title}</div>
+              {grocerie.edit === false ? (
+                <div>{grocerie.title}</div>
+              ) : (
+                <input
+                  type="text"
+                  id="grocery"
+                  name="grocery"
+                  placeholder="e.g. banana"
+                  // value={input}
+                  className="submit-input"
+                ></input>
+              )}{" "}
               <div className="submit-buttons">
                 <button
                   className="submit-btn edit"
                   onClick={() => changeEdit(grocerie.id)}
                 >
-                  {isEditing ? "Confirm" : "Edit"}
+                  {grocerie.edit ? "Confirm" : "Edit"}
                 </button>
                 <button
                   className="submit-btn delete"

@@ -11,9 +11,6 @@ function App() {
   // state for list of groceries
   const [grocerieList, setGrocerieList] = useState([]);
 
-  // state for editing button
-  const [isEditing, setIsEditing] = useState(false);
-
   // function to update the input state field when entering the que
   const changeInput = function (e) {
     setInput(e.target.value);
@@ -40,15 +37,17 @@ function App() {
     setGrocerieList(grocerieList.filter((el) => el.id !== id));
   };
 
-  // change the state propertie of edit -> true by removing the element from the array and replacing with the new element
+  // change the state propertie of edit -> true/false by removing the element from the array and replacing with the new
   const changeEdit = function (id) {
+    const grocerieCopy = [...grocerieList];
     for (let i = 0; i < grocerieList.length; i++) {
       if (id === grocerieList[i].id) {
-        const grocerieCopy = [...grocerieList];
-        grocerieCopy.splice(i, 1, { ...grocerieList[i], edit: true });
-        setGrocerieList(grocerieCopy);
+        if (grocerieList[i].edit === true) {
+          grocerieCopy.splice(i, 1, { ...grocerieList[i], edit: false });
+        } else grocerieCopy.splice(i, 1, { ...grocerieList[i], edit: true });
       }
     }
+    setGrocerieList(grocerieCopy);
   };
 
   return (
@@ -65,7 +64,6 @@ function App() {
           grocerieList={grocerieList}
           deleteItem={deleteItem}
           emptyList={emptyList}
-          isEditing={isEditing}
           changeEdit={changeEdit}
         />
       </div>
