@@ -1,6 +1,12 @@
 import React from "react";
 
-const List = ({ grocerieList, deleteItem, emptyList }) => {
+const List = ({
+  grocerieList,
+  deleteItem,
+  emptyList,
+  isEditing,
+  changeEdit,
+}) => {
   const { title, id } = grocerieList;
   return (
     <div className="grocery-list-container">
@@ -10,7 +16,12 @@ const List = ({ grocerieList, deleteItem, emptyList }) => {
             <li className="grocery-list-item">
               <div>{grocerie.title}</div>
               <div className="submit-buttons">
-                <button className="submit-btn edit">Confirm</button>
+                <button
+                  className="submit-btn edit"
+                  onClick={() => changeEdit(grocerie.id)}
+                >
+                  {isEditing ? "Confirm" : "Edit"}
+                </button>
                 <button
                   className="submit-btn delete"
                   onClick={() => deleteItem(grocerie.id)}
