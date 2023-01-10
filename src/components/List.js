@@ -1,6 +1,12 @@
 import React from "react";
 
-const List = ({ grocerieList, deleteItem, emptyList, changeEdit }) => {
+const List = ({
+  grocerieList,
+  deleteItem,
+  emptyList,
+  changeEdit,
+  changeInput,
+}) => {
   const { title, id, edit } = grocerieList;
   return (
     <div className="grocery-list-container">
@@ -18,6 +24,7 @@ const List = ({ grocerieList, deleteItem, emptyList, changeEdit }) => {
                   placeholder="e.g. banana"
                   // value={input}
                   className="submit-input"
+                  onChange={(e) => changeInput(e)}
                 ></input>
               )}{" "}
               <div className="submit-buttons">
@@ -27,6 +34,7 @@ const List = ({ grocerieList, deleteItem, emptyList, changeEdit }) => {
                 >
                   {grocerie.edit ? "Confirm" : "Edit"}
                 </button>
+
                 <button
                   className="submit-btn delete"
                   onClick={() => deleteItem(grocerie.id)}

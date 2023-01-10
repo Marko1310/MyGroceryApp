@@ -43,8 +43,17 @@ function App() {
     for (let i = 0; i < grocerieList.length; i++) {
       if (id === grocerieList[i].id) {
         if (grocerieList[i].edit === true) {
-          grocerieCopy.splice(i, 1, { ...grocerieList[i], edit: false });
-        } else grocerieCopy.splice(i, 1, { ...grocerieList[i], edit: true });
+          grocerieCopy.splice(i, 1, {
+            ...grocerieList[i],
+            title: input,
+            edit: false,
+          });
+        } else
+          grocerieCopy.splice(i, 1, {
+            ...grocerieList[i],
+
+            edit: true,
+          });
       }
     }
     setGrocerieList(grocerieCopy);
@@ -65,6 +74,7 @@ function App() {
           deleteItem={deleteItem}
           emptyList={emptyList}
           changeEdit={changeEdit}
+          changeInput={changeInput}
         />
       </div>
     </div>
