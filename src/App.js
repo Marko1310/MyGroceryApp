@@ -43,7 +43,6 @@ function App() {
       setGrocerieList((prevGrocerieList) => {
         return [...prevGrocerieList, { title: input, id: id, edit: false }];
       });
-      setShowAlert(false);
     } else {
       setShowAlert(true);
     }
