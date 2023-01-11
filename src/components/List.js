@@ -7,6 +7,8 @@ const List = ({
   changeEdit,
   changeInputEdit,
   inputEdit,
+  currentBtn,
+  currentID,
 }) => {
   const { title, id, edit } = grocerieList;
   return (
@@ -32,7 +34,7 @@ const List = ({
                 <button
                   className="submit-btn edit"
                   onClick={() => changeEdit(grocerie.id)}
-                  disabled="true"
+                  disabled={currentID !== grocerie.id && currentBtn}
                 >
                   {grocerie.edit ? "Confirm" : "Edit"}
                 </button>

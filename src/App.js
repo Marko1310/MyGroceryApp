@@ -14,6 +14,12 @@ function App() {
   // state for list of groceries
   const [grocerieList, setGrocerieList] = useState([]);
 
+  // state for enable/disable buttons
+  const [currentBtn, setCurrentBtn] = useState(false);
+
+  //state for current ID
+  const [currentID, setCurrentID] = useState("");
+
   // function to update the input state field when entering the que
   const changeInput = function (e) {
     setInput(e.target.value);
@@ -66,6 +72,10 @@ function App() {
     }
     setGrocerieList(grocerieCopy);
     setInputEdit("");
+    setCurrentID(id);
+    setCurrentBtn((prevState) => !prevState);
+    console.log(id, currentID);
+    console.log(currentID === id);
   };
 
   return (
@@ -86,6 +96,8 @@ function App() {
           changeInput={changeInput}
           inputEdit={inputEdit}
           changeInputEdit={changeInputEdit}
+          currentBtn={currentBtn}
+          currentID={currentID}
         />
       </div>
     </div>
