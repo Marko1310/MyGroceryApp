@@ -1,7 +1,15 @@
 import React from "react";
+import { useEffect } from "react";
 
-const Alert = () => {
-  return <p></p>;
+const Alert = ({ removeALert, grocerieList }) => {
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      removeALert();
+    }, 3000);
+    return () => clearTimeout(timeout);
+  }, [grocerieList]);
+
+  return <p className="alert">Please enter a valid grocery</p>;
 };
 
 export default Alert;

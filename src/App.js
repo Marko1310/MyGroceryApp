@@ -20,6 +20,9 @@ function App() {
   //state for current ID
   const [currentID, setCurrentID] = useState("");
 
+  //state for showing the alert
+  const [showAlert, setShowAlert] = useState(null);
+
   // function to update the input state field when entering the que
   const changeInput = function (e) {
     setInput(e.target.value);
@@ -28,15 +31,21 @@ function App() {
   // function to update the edit input state
   const changeInputEdit = function (e) {
     setInputEdit(e.target.value);
+    console.log(e);
   };
 
   // function to add groceries
   const addGrocerie = function () {
     const id = Math.random();
 
-    setGrocerieList((prevGrocerieList) => {
-      return [...prevGrocerieList, { title: input, id: id, edit: false }];
-    });
+    if (input !== "") {
+      setShowAlert(false);
+      setGrocerieList((prevGrocerieList) => {
+        return [...prevGrocerieList, { title: input, id: id, edit: false }];
+      });
+    } else {
+    }
+    setShowAlert(true);
     setInput("");
   };
 
@@ -74,19 +83,25 @@ function App() {
     setInputEdit("");
     setCurrentID(id);
     setCurrentBtn((prevState) => !prevState);
-    console.log(id, currentID);
-    console.log(currentID === id);
+  };
+
+  // function to remove alert
+  const removeALert = function () {
+    setShowAlert(false);
   };
 
   return (
     <div>
       <Navbar />
       <div className="main-container">
-        <Alert />
+        <div className="alert-container">
+          {showAlert && <Alert removeALert={removeALert} />}
+        </div>
         <Submit
           changeInput={changeInput}
           addGrocerie={addGrocerie}
           input={input}
+          grocerieList={grocerieList}
         />
         <List
           grocerieList={grocerieList}
