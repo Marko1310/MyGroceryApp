@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import List from "./components/List";
 import Alert from "./components/Alert";
 import Navbar from "./components/Navbar";
@@ -31,7 +31,6 @@ function App() {
   // function to update the edit input state
   const changeInputEdit = function (e) {
     setInputEdit(e.target.value);
-    console.log(e);
   };
 
   // function to add groceries
@@ -63,9 +62,9 @@ function App() {
   // change the state propertie of edit -> true/false by removing the element from the array and replacing with the new
   const changeEdit = function (id) {
     const grocerieCopy = [...grocerieList];
-    for (let i = 0; i < grocerieList.length; i++) {
-      if (id === grocerieList[i].id) {
-        if (grocerieList[i].edit === true) {
+    for (let i = 0; i < grocerieCopy.length; i++) {
+      if (id === grocerieCopy[i].id) {
+        if (grocerieCopy[i].edit === true) {
           grocerieCopy.splice(i, 1, {
             ...grocerieList[i],
             title: inputEdit,
@@ -74,7 +73,6 @@ function App() {
         } else
           grocerieCopy.splice(i, 1, {
             ...grocerieList[i],
-
             edit: true,
           });
       }

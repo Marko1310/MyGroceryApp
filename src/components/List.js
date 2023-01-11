@@ -10,7 +10,6 @@ const List = ({
   currentBtn,
   currentID,
 }) => {
-  const { title, id, edit } = grocerieList;
   return (
     <div className="grocery-list-container">
       {grocerieList.map((grocerie) => {

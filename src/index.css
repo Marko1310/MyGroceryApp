@@ -199,11 +199,11 @@ Grocery List
   border-radius: var(--radius);
   box-shadow: var(--light-shadow);
   transition: var(--transition);
-  padding: 2rem;
+  padding: 1rem 1rem 2rem 1rem;
 }
 
 .submit-container {
-  width: 50vw;
+  width: 100%;
   margin: 0 auto;
   max-width: 30rem;
   display: flex;
@@ -273,7 +273,7 @@ Grocery List
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 50vw;
+  width: 100%;
   margin: 0 auto;
   max-width: 30rem;
 }
