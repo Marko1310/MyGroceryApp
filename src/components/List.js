@@ -5,7 +5,8 @@ const List = ({
   deleteItem,
   emptyList,
   changeEdit,
-  changeInput,
+  changeInputEdit,
+  inputEdit,
 }) => {
   const { title, id, edit } = grocerieList;
   return (
@@ -21,16 +22,17 @@ const List = ({
                   type="text"
                   id="grocery"
                   name="grocery"
-                  placeholder="e.g. banana"
-                  // value={input}
+                  placeholder={grocerie.title}
+                  value={inputEdit}
                   className="submit-input"
-                  onChange={(e) => changeInput(e)}
+                  onChange={(e) => changeInputEdit(e)}
                 ></input>
               )}{" "}
               <div className="submit-buttons">
                 <button
                   className="submit-btn edit"
                   onClick={() => changeEdit(grocerie.id)}
+                  disabled="true"
                 >
                   {grocerie.edit ? "Confirm" : "Edit"}
                 </button>

@@ -8,12 +8,20 @@ function App() {
   // state for input field
   const [input, setInput] = useState("");
 
+  // state for edit field
+  const [inputEdit, setInputEdit] = useState("");
+
   // state for list of groceries
   const [grocerieList, setGrocerieList] = useState([]);
 
   // function to update the input state field when entering the que
   const changeInput = function (e) {
     setInput(e.target.value);
+  };
+
+  // function to update the edit input state
+  const changeInputEdit = function (e) {
+    setInputEdit(e.target.value);
   };
 
   // function to add groceries
@@ -45,7 +53,7 @@ function App() {
         if (grocerieList[i].edit === true) {
           grocerieCopy.splice(i, 1, {
             ...grocerieList[i],
-            title: input,
+            title: inputEdit,
             edit: false,
           });
         } else
@@ -57,6 +65,7 @@ function App() {
       }
     }
     setGrocerieList(grocerieCopy);
+    setInputEdit("");
   };
 
   return (
@@ -75,6 +84,8 @@ function App() {
           emptyList={emptyList}
           changeEdit={changeEdit}
           changeInput={changeInput}
+          inputEdit={inputEdit}
+          changeInputEdit={changeInputEdit}
         />
       </div>
     </div>
