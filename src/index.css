@@ -266,11 +266,24 @@ Grocery List
   background-color: var(--clr-green-light);
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
+  width: 5rem;
 }
 
 .edit:hover {
   background-color: var(--clr-green-dark);
 }
+
+.confirm {
+  background-color: var(--clr-grey-6);
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  width: 5rem;
+}
+
+.confirm:hover {
+  background-color: var(--clr-grey-8);
+}
+
 .delete {
   background-color: var(--clr-red-light);
   border-top-right-radius: 0;

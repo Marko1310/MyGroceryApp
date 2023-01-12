@@ -31,7 +31,9 @@ const List = ({
               )}{" "}
               <div className="submit-buttons">
                 <button
-                  className="submit-btn edit"
+                  className={
+                    grocerie.edit ? `submit-btn confirm` : `submit-btn edit`
+                  }
                   onClick={() => changeEdit(grocerie.id)}
                   disabled={currentID !== grocerie.id && currentBtn}
                 >
