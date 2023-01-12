@@ -25,7 +25,7 @@ const List = ({
                   name="grocery"
                   placeholder={grocerie.title}
                   value={inputEdit}
-                  className="submit-input"
+                  className="submit-edit"
                   onChange={(e) => changeInputEdit(e)}
                 ></input>
               )}{" "}

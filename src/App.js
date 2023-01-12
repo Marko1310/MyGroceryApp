@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import List from "./components/List";
 import Alert from "./components/Alert";
 import Navbar from "./components/Navbar";
@@ -12,7 +12,13 @@ function App() {
   const [inputEdit, setInputEdit] = useState("");
 
   // state for list of groceries
-  const [grocerieList, setGrocerieList] = useState([]);
+  const [grocerieList, setGrocerieList] = useState(() => {
+    return JSON.parse(localStorage.getItem("groceries")) || [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("groceries", JSON.stringify(grocerieList));
+  }, [grocerieList]);
 
   // state for enable/disable buttons
   const [currentBtn, setCurrentBtn] = useState(false);

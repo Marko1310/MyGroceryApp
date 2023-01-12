@@ -223,6 +223,17 @@ Grocery List
   color: var(--clr-grey-5);
 }
 
+.submit-edit {
+  padding-right: 1rem;
+  background: var(--clr-grey-10);
+  border-top-left-radius: var(--radius);
+  border-bottom-left-radius: var(--radius);
+  border-color: transparent;
+  font-size: 1rem;
+  color: var(--clr-grey-5);
+  width: 50%;
+}
+
 .submit-buttons {
   display: flex;
   flex-direction: row;
@@ -294,7 +305,6 @@ Grocery List
   transition: var(--transition);
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  padding-left: 1rem;
 }
 
 .grocery-list-item:hover {
