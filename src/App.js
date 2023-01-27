@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import List from "./components/List";
-import Alert from "./components/Alert";
-import Navbar from "./components/Navbar";
-import Submit from "./components/Submit";
+import List from "./components/list/List";
+import Alert from "./components/alert/Alert";
+import Navbar from "./components/navbar/Navbar";
+import Submit from "./components/submit/Submit";
 
 function App() {
   // state for input field
