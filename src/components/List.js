@@ -34,7 +34,9 @@ const List = ({
                   className={
                     grocerie.edit ? `submit-btn confirm` : `submit-btn edit`
                   }
-                  onClick={() => changeEdit(grocerie.id)}
+                  onClick={(e) => {
+                    changeEdit(grocerie.id);
+                  }}
                   disabled={currentID !== grocerie.id && currentBtn}
                 >
                   {grocerie.edit ? "Confirm" : "Edit"}
