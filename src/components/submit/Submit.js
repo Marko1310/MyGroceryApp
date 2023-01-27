@@ -1,3 +1,5 @@
+import "./Submit.css";
+
 const Submit = ({ changeInput, addGrocerie, input }) => {
   return (
     <form

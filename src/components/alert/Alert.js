@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
+import "./Alert.css";
 
 const Alert = ({ removeALert, grocerieList }) => {
   useEffect(() => {

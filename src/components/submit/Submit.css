@@ -1,0 +1,90 @@
+.submit-container {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 30rem;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 2rem;
+}
+
+.submit-input {
+  padding: 0.25rem;
+  padding-left: 1rem;
+  background: var(--clr-grey-10);
+  border-top-left-radius: var(--radius);
+  border-bottom-left-radius: var(--radius);
+  border-color: transparent;
+  font-size: 1rem;
+  flex: 1 0 auto;
+  color: var(--clr-grey-5);
+}
+
+.submit-edit {
+  padding-right: 1rem;
+  background: var(--clr-grey-10);
+  border-top-left-radius: var(--radius);
+  border-bottom-left-radius: var(--radius);
+  border-color: transparent;
+  font-size: 1rem;
+  color: var(--clr-grey-5);
+  width: 50%;
+}
+
+.submit-buttons {
+  display: flex;
+  flex-direction: row;
+  width: 9rem;
+  justify-content: end;
+  gap: 0.5rem;
+}
+
+.submit-btn {
+  background: var(--clr-primary-8);
+  border-color: transparent;
+  display: grid;
+  align-items: center;
+  padding: 0.25rem;
+  text-transform: capitalize;
+  letter-spacing: 2px;
+  border-top-right-radius: var(--radius);
+  border-bottom-right-radius: var(--radius);
+  cursor: pointer;
+  content: var(--clr-primary-5);
+  transition: var(--transition);
+  font-size: 0.85rem;
+}
+.submit-btn:hover {
+  background: var(--clr-primary-5);
+  color: var(--clr-white);
+}
+
+.edit {
+  background-color: var(--clr-green-light);
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  width: 5rem;
+}
+
+.edit:hover {
+  background-color: var(--clr-green-dark);
+}
+
+.confirm {
+  background-color: var(--clr-grey-6);
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  width: 5rem;
+}
+
+.confirm:hover {
+  background-color: var(--clr-grey-8);
+}
+
+.delete {
+  background-color: var(--clr-red-light);
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.delete:hover {
+  background-color: var(--clr-red-dark);
+}

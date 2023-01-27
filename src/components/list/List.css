@@ -1,0 +1,71 @@
+.main-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 90vw;
+  margin: 0 auto;
+  max-width: 35rem;
+  margin-top: 4rem;
+  background: var(--clr-white);
+  border-radius: var(--radius);
+  box-shadow: var(--light-shadow);
+  transition: var(--transition);
+  padding: 1rem 1rem 2rem 1rem;
+}
+
+.grocery-list-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 30rem;
+}
+
+.grocery-list {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+  width: 100%;
+}
+
+.grocery-list-item {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 1rem;
+  transition: var(--transition);
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.grocery-list-item:hover {
+  color: var(--clr-grey-5);
+  cursor: default;
+}
+
+.grocery-list-item:hover .title {
+  color: var(--clr-grey-5);
+}
+
+.clear-btn {
+  text-transform: capitalize;
+  height: 1.5rem;
+  display: grid;
+  align-items: center;
+  background: transparent;
+  border-color: transparent;
+  color: var(--clr-red-light);
+  margin: 0 auto;
+  font-size: 0.85rem;
+  letter-spacing: var(--spacing);
+  cursor: pointer;
+  transition: var(--transition);
+  margin-top: 1.25rem;
+}
+
+.clear-btn:hover {
+  color: var(--clr-red-dark);
+}
