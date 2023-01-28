@@ -3,6 +3,7 @@ import List from "./components/list/List";
 import Alert from "./components/alert/Alert";
 import Navbar from "./components/navbar/Navbar";
 import Submit from "./components/submit/Submit";
+import Signin from "./components/signIn/Signin";
 
 function App() {
   // state for input field
@@ -96,7 +97,8 @@ function App() {
 
   return (
     <div>
-      <Navbar />
+      <Signin />
+      {/* <Navbar />
       <div className="main-container">
         <div className="alert-container">
           {showAlert && <Alert removeALert={removeALert} />}
@@ -118,7 +120,7 @@ function App() {
           currentBtn={currentBtn}
           currentID={currentID}
         />
-      </div>
+      </div> */}
     </div>
   );
 }
