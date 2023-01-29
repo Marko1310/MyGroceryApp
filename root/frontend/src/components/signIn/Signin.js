@@ -4,15 +4,14 @@ import "./Signin.css";
 const Signin = () => {
   return (
     <div className="signin-container">
-      <form>
-        <label for="email">Email: </label>
-        <br />
-        <input type="text" id="fname" name="fname"></input>
-        <br />
-        <label for="password">Password:</label>
-        <br />
-        <input type="text"></input>
-        <br />
+      <form className="form-validate">
+        <p className="title">LOGIN</p>
+        <label for="email"></label>
+        <input className="forms" type="text" id="fname" name="fname"></input>
+
+        <label for="password"></label>
+        <input className="forms" type="text"></input>
+
         <button className="signin-button">Signin</button>
       </form>
     </div>
