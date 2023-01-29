@@ -4,8 +4,12 @@ import Alert from "./components/alert/Alert";
 import Navbar from "./components/navbar/Navbar";
 import Submit from "./components/submit/Submit";
 import Login from "./components/logIn/Login";
+import Signup from "./components/signUp/Signup";
 
 function App() {
+  // state for logged in
+  const [logged, setLogged] = useState(true);
+
   // state for input field
   const [input, setInput] = useState("");
 
@@ -97,30 +101,35 @@ function App() {
 
   return (
     <div>
-      <Login />
-      {/* <Navbar />
-      <div className="main-container">
-        <div className="alert-container">
-          {showAlert && <Alert removeALert={removeALert} />}
+      <Signup />
+      {/* {logged && <Login />}
+      {!logged && (
+        <div>
+          <Navbar />
+          <div className="main-container">
+            <div className="alert-container">
+              {showAlert && <Alert removeALert={removeALert} />}
+            </div>
+            <Submit
+              changeInput={changeInput}
+              addGrocerie={addGrocerie}
+              input={input}
+              grocerieList={grocerieList}
+            />
+            <List
+              grocerieList={grocerieList}
+              deleteItem={deleteItem}
+              emptyList={emptyList}
+              changeEdit={changeEdit}
+              changeInput={changeInput}
+              inputEdit={inputEdit}
+              changeInputEdit={changeInputEdit}
+              currentBtn={currentBtn}
+              currentID={currentID}
+            />
+          </div>
         </div>
-        <Submit
-          changeInput={changeInput}
-          addGrocerie={addGrocerie}
-          input={input}
-          grocerieList={grocerieList}
-        />
-        <List
-          grocerieList={grocerieList}
-          deleteItem={deleteItem}
-          emptyList={emptyList}
-          changeEdit={changeEdit}
-          changeInput={changeInput}
-          inputEdit={inputEdit}
-          changeInputEdit={changeInputEdit}
-          currentBtn={currentBtn}
-          currentID={currentID}
-        />
-      </div> */}
+      )} */}
     </div>
   );
 }

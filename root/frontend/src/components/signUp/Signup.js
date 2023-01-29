@@ -1,11 +1,11 @@
 import React from "react";
-import "./Login.css";
+import "./Signup.css";
 
 const Signin = () => {
   return (
-    <div className="login-container">
+    <div className="signup-container">
       <form className="form-validate">
-        <p className="title">LOGIN</p>
+        <p className="title">SIGNUP</p>
         <label for="email"></label>
         <input
           className="forms"
@@ -18,10 +18,10 @@ const Signin = () => {
         <label for="password"></label>
         <input className="forms" type="text" placeholder="Password"></input>
 
-        <button className="signin-button">Login</button>
+        <button className="signup-button">Login</button>
         <div className="login-footer">
-          <p>Not a member? </p>
-          <a className="sign-up"> Sign up now</a>
+          <p>Already a member? </p>
+          <a className="login">Login</a>
         </div>
       </form>
     </div>
