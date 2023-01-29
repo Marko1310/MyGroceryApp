@@ -8,7 +8,7 @@ import Signup from "./components/signUp/Signup";
 
 function App() {
   // state for logged in
-  const [logged, setLogged] = useState(true);
+  const [logged, setLogged] = useState(false);
 
   // state for input field
   const [input, setInput] = useState("");

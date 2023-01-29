@@ -85,8 +85,10 @@ body {
   color: #617d98;
   text-decoration: underline;
   margin: 0;
+  transition: all 0.4s;
 }
 
 .sign-up:hover {
   cursor: pointer;
+  color: #d33f8d;
 }
