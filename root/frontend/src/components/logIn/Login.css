@@ -1,13 +1,13 @@
-.signin-container {
+.login-container {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   left: 50%;
   top: 50%;
   position: absolute;
   transform: translate(-50%, -50%);
-  padding: 2.5rem;
+  padding: 3.5rem 3.5rem 0rem 3.5rem;
   display: flex;
   border-radius: 3px;
-  width: 20rem;
+  width: 25rem;
   justify-content: center;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
@@ -23,9 +23,10 @@
 .title {
   color: #343334;
   font-weight: 800;
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   padding-bottom: 3rem;
+  padding-top: 3rem;
 }
 
 .forms {
@@ -39,6 +40,13 @@
   width: 100%;
   height: 3rem;
   font-size: 18px;
+  padding-left: 2rem;
+  color: #464545;
+}
+
+::placeholder {
+  color: rgb(128, 127, 127);
+  opacity: 1;
 }
 
 .signin-button {
@@ -58,4 +66,21 @@
 
 .signin-button:hover {
   background-color: #838283;
+}
+
+.login-footer {
+  margin-top: 5rem;
+  margin-bottom: 0rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.sign-up {
+  color: #617d98;
+  text-decoration: underline;
+  margin: 0;
+}
+
+.sign-up:hover {
+  cursor: pointer;
 }
