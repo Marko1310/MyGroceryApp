@@ -1,7 +1,7 @@
 import React from "react";
 import "./Login.css";
 
-const Signin = () => {
+const Signin = ({ switchLoginSignup }) => {
   return (
     <div className="login-container">
       <form className="form-validate">
@@ -21,7 +21,10 @@ const Signin = () => {
         <button className="signin-button">Login</button>
         <div className="login-footer">
           <p>Not a member? </p>
-          <a className="sign-up"> Sign up now</a>
+          <a onClick={switchLoginSignup} className="sign-up">
+            {" "}
+            Sign up now
+          </a>
         </div>
       </form>
     </div>

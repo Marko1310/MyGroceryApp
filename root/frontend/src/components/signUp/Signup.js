@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Signup.css";
 
-function Signin({ changeLogged }) {
+function Signin({ changeLogged, switchLoginSignup }) {
   // state for input field
   const [input, setInput] = useState({
     name: "",
@@ -38,7 +38,7 @@ function Signin({ changeLogged }) {
     <div className="signup-container">
       <form onSubmit={signin} className="form-validate">
         <p className="title">SIGN UP</p>
-        <label for="name"></label>
+        <label htmlFor="name"></label>
         <input
           onChange={changeName}
           className="forms"
@@ -48,7 +48,7 @@ function Signin({ changeLogged }) {
           placeholder="Name"
         ></input>
 
-        <label for="email"></label>
+        <label htmlFor="email"></label>
         <input
           onChange={changeEmail}
           className="forms"
@@ -58,7 +58,7 @@ function Signin({ changeLogged }) {
           placeholder="Email"
         ></input>
 
-        <label for="password"></label>
+        <label htmlFor="password"></label>
         <input
           onChange={changePassword}
           className="forms"
@@ -69,7 +69,9 @@ function Signin({ changeLogged }) {
         <button className="signup-button">sign up</button>
         <div className="login-footer">
           <p>Already a member? </p>
-          <a className="login">Login</a>
+          <a onClick={switchLoginSignup} className="login">
+            Login
+          </a>
         </div>
       </form>
     </div>

@@ -10,6 +10,9 @@ function App() {
   // state for logged in
   const [logged, setLogged] = useState(false);
 
+  // state for login or sign up
+  const [loginSignUp, setLoginSignup] = useState("signup");
+
   // state for input field
   const [input, setInput] = useState("");
 
@@ -104,10 +107,26 @@ function App() {
     setLogged(true);
   };
 
+  // function to switch between login and signup
+  const switchLoginSignup = function () {
+    if (loginSignUp === "signup") {
+      setLoginSignup("login");
+    } else if (loginSignUp === "login") {
+      setLoginSignup("signup");
+    }
+  };
+
   return (
     <div>
-      {<Signup changeLogged={changeLogged} />}
-      {/* {logged && <Login />}
+      {loginSignUp === "signup" && (
+        <Signup
+          changeLogged={changeLogged}
+          switchLoginSignup={switchLoginSignup}
+        />
+      )}
+      {loginSignUp === "login" && (
+        <Login switchLoginSignup={switchLoginSignup} />
+      )}
       {!logged && (
         <div>
           <Navbar />
@@ -134,7 +153,7 @@ function App() {
             />
           </div>
         </div>
-      )} */}
+      )}
     </div>
   );
 }
