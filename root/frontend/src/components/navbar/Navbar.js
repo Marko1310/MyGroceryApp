@@ -2,7 +2,7 @@ import React from "react";
 import logo from "../../images/grocery.png";
 import "./Navbar.css";
 
-const Navbar = () => {
+const Navbar = ({ signout }) => {
   return (
     <div className="navbar-container">
       <div className="navbar-left">
@@ -10,7 +10,9 @@ const Navbar = () => {
         <p className="navbar-title">MY GROCERY LIST</p>
       </div>
       <div className="navbar-right">
-        <a className="navbar-signout">Signout</a>
+        <a onClick={signout} className="navbar-signout">
+          Signout
+        </a>
       </div>
     </div>
   );

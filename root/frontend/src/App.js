@@ -116,6 +116,13 @@ function App() {
     }
   };
 
+  // function to sign out
+  const signout = function () {
+    setLogged(false);
+    setLoginSignup("login");
+    console.log("aaa");
+  };
+
   return (
     <div>
       {loginSignUp === "signup" && !logged && (
@@ -132,7 +139,7 @@ function App() {
       )}
       {logged && (
         <div>
-          <Navbar />
+          <Navbar signout={signout} />
           <div className="main-container">
             <div className="alert-container">
               {showAlert && <Alert removeALert={removeALert} />}
