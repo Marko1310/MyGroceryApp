@@ -118,16 +118,19 @@ function App() {
 
   return (
     <div>
-      {loginSignUp === "signup" && (
+      {loginSignUp === "signup" && !logged && (
         <Signup
           changeLogged={changeLogged}
           switchLoginSignup={switchLoginSignup}
         />
       )}
-      {loginSignUp === "login" && (
-        <Login switchLoginSignup={switchLoginSignup} />
+      {loginSignUp === "login" && !logged && (
+        <Login
+          switchLoginSignup={switchLoginSignup}
+          changeLogged={changeLogged}
+        />
       )}
-      {!logged && (
+      {logged && (
         <div>
           <Navbar />
           <div className="main-container">

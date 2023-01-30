@@ -1,13 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Login.css";
 
-const Signin = ({ switchLoginSignup }) => {
+function Login({ changeLogged, switchLoginSignup }) {
+  // state for input field
+  const [input, setInput] = useState({
+    name: "",
+    password: "",
+  });
+
+  const changeName = function (e) {
+    setInput((prevInput) => {
+      return { ...prevInput, name: e.target.value };
+    });
+  };
+
+  const changePassword = function (e) {
+    setInput((prevInput) => {
+      return { ...prevInput, password: e.target.value };
+    });
+  };
+
+  const login = function (event) {
+    event.preventDefault();
+    if (input.name === "a" && input.password === "a") {
+      changeLogged();
+    }
+  };
+
   return (
     <div className="login-container">
-      <form className="form-validate">
+      <form onSubmit={login} className="form-validate">
         <p className="title">LOGIN</p>
-        <label for="email"></label>
+        <label htmlFor="email"></label>
         <input
+          onChange={changeName}
           className="forms"
           type="text"
           id="fname"
@@ -15,20 +41,24 @@ const Signin = ({ switchLoginSignup }) => {
           placeholder="Email"
         ></input>
 
-        <label for="password"></label>
-        <input className="forms" type="text" placeholder="Password"></input>
+        <label htmlFor="password"></label>
+        <input
+          onChange={changePassword}
+          className="forms"
+          type="text"
+          placeholder="Password"
+        ></input>
 
         <button className="signin-button">Login</button>
         <div className="login-footer">
           <p>Not a member? </p>
           <a onClick={switchLoginSignup} className="sign-up">
-            {" "}
             Sign up now
           </a>
         </div>
       </form>
     </div>
   );
-};
+}
 
-export default Signin;
+export default Login;
