@@ -99,9 +99,14 @@ function App() {
     setShowAlert(false);
   };
 
+  // function to change logged status
+  const changeLogged = function () {
+    setLogged(true);
+  };
+
   return (
     <div>
-      <Signup />
+      {<Signup changeLogged={changeLogged} />}
       {/* {logged && <Login />}
       {!logged && (
         <div>

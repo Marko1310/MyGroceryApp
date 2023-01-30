@@ -1,13 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Signup.css";
 
-const Signin = () => {
+function Signin({ changeLogged }) {
+  // state for input field
+  const [input, setInput] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const signin = function (event) {
+    event.preventDefault();
+    if (
+      input.name === "a"
+      // input.password === "a" &&
+      // input.password === "a"
+    ) {
+      changeLogged();
+      console.log(input.name);
+    }
+  };
+
+  const changeName = function (e) {
+    setInput((prevInput) => {
+      return { ...prevInput, name: e.target.value };
+    });
+  };
+
   return (
     <div className="signup-container">
-      <form className="form-validate">
+      <form onSubmit={signin} className="form-validate">
         <p className="title">SIGN UP</p>
         <label for="name"></label>
         <input
+          onChange={changeName}
           className="forms"
           type="text"
           id="name"
@@ -35,6 +61,6 @@ const Signin = () => {
       </form>
     </div>
   );
-};
+}
 
 export default Signin;
