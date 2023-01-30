@@ -11,19 +11,26 @@ function Signin({ changeLogged }) {
 
   const signin = function (event) {
     event.preventDefault();
-    if (
-      input.name === "a"
-      // input.password === "a" &&
-      // input.password === "a"
-    ) {
+    if (input.name === "a" && input.email === "a" && input.password === "a") {
       changeLogged();
-      console.log(input.name);
     }
   };
 
   const changeName = function (e) {
     setInput((prevInput) => {
       return { ...prevInput, name: e.target.value };
+    });
+  };
+
+  const changeEmail = function (e) {
+    setInput((prevInput) => {
+      return { ...prevInput, email: e.target.value };
+    });
+  };
+
+  const changePassword = function (e) {
+    setInput((prevInput) => {
+      return { ...prevInput, password: e.target.value };
     });
   };
 
@@ -43,6 +50,7 @@ function Signin({ changeLogged }) {
 
         <label for="email"></label>
         <input
+          onChange={changeEmail}
           className="forms"
           type="text"
           id="email"
@@ -51,7 +59,12 @@ function Signin({ changeLogged }) {
         ></input>
 
         <label for="password"></label>
-        <input className="forms" type="text" placeholder="Password"></input>
+        <input
+          onChange={changePassword}
+          className="forms"
+          type="text"
+          placeholder="Password"
+        ></input>
 
         <button className="signup-button">sign up</button>
         <div className="login-footer">
