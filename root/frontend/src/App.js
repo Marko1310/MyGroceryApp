@@ -10,6 +10,9 @@ function App() {
   // state for logged in
   const [logged, setLogged] = useState(false);
 
+  // state for login or sign up
+  const [loginSignUp, setLoginSignup] = useState("signup");
+
   // state for input field
   const [input, setInput] = useState("");
 
@@ -99,13 +102,44 @@ function App() {
     setShowAlert(false);
   };
 
+  // function to change logged status
+  const changeLogged = function () {
+    setLogged(true);
+  };
+
+  // function to switch between login and signup
+  const switchLoginSignup = function () {
+    if (loginSignUp === "signup") {
+      setLoginSignup("login");
+    } else if (loginSignUp === "login") {
+      setLoginSignup("signup");
+    }
+  };
+
+  // function to sign out
+  const signout = function () {
+    setLogged(false);
+    setLoginSignup("login");
+    console.log("aaa");
+  };
+
   return (
     <div>
-      <Signup />
-      {/* {logged && <Login />}
-      {!logged && (
+      {loginSignUp === "signup" && !logged && (
+        <Signup
+          changeLogged={changeLogged}
+          switchLoginSignup={switchLoginSignup}
+        />
+      )}
+      {loginSignUp === "login" && !logged && (
+        <Login
+          switchLoginSignup={switchLoginSignup}
+          changeLogged={changeLogged}
+        />
+      )}
+      {logged && (
         <div>
-          <Navbar />
+          <Navbar signout={signout} />
           <div className="main-container">
             <div className="alert-container">
               {showAlert && <Alert removeALert={removeALert} />}
@@ -129,7 +163,7 @@ function App() {
             />
           </div>
         </div>
-      )} */}
+      )}
     </div>
   );
 }
