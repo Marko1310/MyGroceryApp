@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Signup.css";
 
-function Signin({ changeLogged, switchRoute }) {
+function Signup({ changeLogged, switchRoute, updateUser }) {
   // state for input field
   const [input, setInput] = useState({
     name: "",
@@ -9,9 +9,9 @@ function Signin({ changeLogged, switchRoute }) {
     password: "",
   });
 
-  const signin = function (event) {
+  const signUp = function (event) {
     event.preventDefault();
-    fetch("http://localhost/3001/register", {
+    fetch("http://localhost:3001/register", {
       method: "post",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({
@@ -19,9 +19,14 @@ function Signin({ changeLogged, switchRoute }) {
         email: input.email,
         password: input.password,
       }),
-    });
-
-    changeLogged();
+    })
+      .then((response) => response.json())
+      .then((user) => {
+        if (user) {
+          updateUser(user);
+          changeLogged();
+        }
+      });
   };
 
   const changeName = function (e) {
@@ -44,7 +49,7 @@ function Signin({ changeLogged, switchRoute }) {
 
   return (
     <div className="signup-container">
-      <form onSubmit={signin} className="form-validate">
+      <form onSubmit={signUp} className="form-validate">
         <p className="title">SIGN UP</p>
         <label htmlFor="name"></label>
         <input
@@ -86,4 +91,4 @@ function Signin({ changeLogged, switchRoute }) {
   );
 }
 
-export default Signin;
+export default Signup;

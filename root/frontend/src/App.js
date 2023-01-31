@@ -24,6 +24,15 @@ function App() {
     return JSON.parse(localStorage.getItem("groceries")) || [];
   });
 
+  // state for current user
+  const [user, setUser] = useState({
+    id: "",
+    name: "",
+    email: "",
+    groceries: [],
+    joined: new Date(),
+  });
+
   useEffect(() => {
     localStorage.setItem("groceries", JSON.stringify(grocerieList));
   }, [grocerieList]);
@@ -123,10 +132,26 @@ function App() {
     console.log("aaa");
   };
 
+  // function to update current user
+  const updateUser = function (user) {
+    setUser({
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      groceries: user.groceries,
+      joined: new Date(),
+    });
+    console.log(user);
+  };
+
   return (
     <div>
       {Route === "signup" && !logged && (
-        <Signup changeLogged={changeLogged} switchRoute={switchRoute} />
+        <Signup
+          changeLogged={changeLogged}
+          switchRoute={switchRoute}
+          updateUser={updateUser}
+        />
       )}
       {Route === "login" && !logged && (
         <Login switchRoute={switchRoute} changeLogged={changeLogged} />
