@@ -11,9 +11,17 @@ function Signin({ changeLogged, switchRoute }) {
 
   const signin = function (event) {
     event.preventDefault();
-    if (input.name === "a" && input.email === "a" && input.password === "a") {
-      changeLogged();
-    }
+    fetch("http://localhost/3001/register", {
+      method: "post",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({
+        name: input.name,
+        email: input.email,
+        password: input.password,
+      }),
+    });
+
+    changeLogged();
   };
 
   const changeName = function (e) {
