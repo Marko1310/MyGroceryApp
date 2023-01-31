@@ -80,6 +80,22 @@ app.get("/profile/:id", (req, res) => {
   }
 });
 
+app.patch("/profile/:id", (req, res) => {
+  const { id } = req.params;
+  const { grocerie } = req.body;
+  let found = false;
+  database.users.forEach((user) => {
+    if (id === user.id) {
+      found = true;
+      user.groceries.push(grocerie);
+      return res.json(user);
+    }
+  });
+  if (!found) {
+    res.status(404).json("no such user");
+  }
+});
+
 /*
 / --> res = this is working
 /signin --> POST --> res = seccess, fail
