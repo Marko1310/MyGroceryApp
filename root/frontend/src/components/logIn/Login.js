@@ -29,8 +29,13 @@ function Login({ changeLogged, switchRoute }) {
         email: input.email,
         password: input.password,
       }),
-    });
-    changeLogged();
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data === "success") {
+          changeLogged();
+        }
+      });
   };
 
   return (
