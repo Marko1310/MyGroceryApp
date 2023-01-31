@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import "./Login.css";
 
-function Login({ changeLogged, switchLoginSignup }) {
+function Login({ changeLogged, switchRoute }) {
   // state for input field
   const [input, setInput] = useState({
-    name: "",
+    email: "",
     password: "",
   });
 
-  const changeName = function (e) {
+  const changeEmail = function (e) {
     setInput((prevInput) => {
-      return { ...prevInput, name: e.target.value };
+      return { ...prevInput, email: e.target.value };
     });
   };
 
@@ -22,9 +22,15 @@ function Login({ changeLogged, switchLoginSignup }) {
 
   const login = function (event) {
     event.preventDefault();
-    if (input.name === "a" && input.password === "a") {
-      changeLogged();
-    }
+    fetch("http://localhost:3001/signin", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: input.email,
+        password: input.password,
+      }),
+    });
+    changeLogged();
   };
 
   return (
@@ -33,7 +39,7 @@ function Login({ changeLogged, switchLoginSignup }) {
         <p className="title">LOGIN</p>
         <label htmlFor="email"></label>
         <input
-          onChange={changeName}
+          onChange={changeEmail}
           className="forms"
           type="text"
           id="fname"
@@ -52,7 +58,7 @@ function Login({ changeLogged, switchLoginSignup }) {
         <button className="signin-button">Login</button>
         <div className="login-footer">
           <p>Not a member? </p>
-          <a onClick={switchLoginSignup} className="sign-up">
+          <a onClick={switchRoute} className="sign-up">
             Sign up now
           </a>
         </div>

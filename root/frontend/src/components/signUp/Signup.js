@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Signup.css";
 
-function Signin({ changeLogged, switchLoginSignup }) {
+function Signin({ changeLogged, switchRoute }) {
   // state for input field
   const [input, setInput] = useState({
     name: "",
@@ -69,7 +69,7 @@ function Signin({ changeLogged, switchLoginSignup }) {
         <button className="signup-button">sign up</button>
         <div className="login-footer">
           <p>Already a member? </p>
-          <a onClick={switchLoginSignup} className="login">
+          <a onClick={switchRoute} className="login">
             Login
           </a>
         </div>

@@ -11,7 +11,7 @@ function App() {
   const [logged, setLogged] = useState(false);
 
   // state for login or sign up
-  const [loginSignUp, setLoginSignup] = useState("signup");
+  const [Route, setRoute] = useState("login");
 
   // state for input field
   const [input, setInput] = useState("");
@@ -108,34 +108,28 @@ function App() {
   };
 
   // function to switch between login and signup
-  const switchLoginSignup = function () {
-    if (loginSignUp === "signup") {
-      setLoginSignup("login");
-    } else if (loginSignUp === "login") {
-      setLoginSignup("signup");
+  const switchRoute = function () {
+    if (Route === "signup") {
+      setRoute("login");
+    } else if (Route === "login") {
+      setRoute("signup");
     }
   };
 
   // function to sign out
   const signout = function () {
     setLogged(false);
-    setLoginSignup("login");
+    setRoute("login");
     console.log("aaa");
   };
 
   return (
     <div>
-      {loginSignUp === "signup" && !logged && (
-        <Signup
-          changeLogged={changeLogged}
-          switchLoginSignup={switchLoginSignup}
-        />
+      {Route === "signup" && !logged && (
+        <Signup changeLogged={changeLogged} switchRoute={switchRoute} />
       )}
-      {loginSignUp === "login" && !logged && (
-        <Login
-          switchLoginSignup={switchLoginSignup}
-          changeLogged={changeLogged}
-        />
+      {Route === "login" && !logged && (
+        <Login switchRoute={switchRoute} changeLogged={changeLogged} />
       )}
       {logged && (
         <div>
