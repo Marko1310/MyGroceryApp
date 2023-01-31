@@ -35,11 +35,7 @@ const database = {
 };
 
 app.get("/", (req, res) => {
-  res.status(200).json("Server is live");
-});
-
-app.get("/register", (req, res) => {
-  res.status(200).json("Server is live");
+  res.send(database.users);
 });
 
 app.listen(PORT, () => {
@@ -55,10 +51,25 @@ app.post("/signin", (req, res) => {
   } else res.status(400).json("error login in");
 });
 
+app.post("/register", (req, res) => {
+  const id = database.users[database.users.length - 1].id * 1 + 1;
+  console.log(id);
+  const { name, email, password } = req.body;
+  database.users.push({
+    id: id,
+    name: name,
+    email: email,
+    password: password,
+    groceries: [],
+    joined: new Date(),
+  });
+  res.json(database.users[database.users.length - 1]);
+});
+
 /*
 / --> res = this is working
 /signin --> POST --> res = seccess, fail
-/registerr --> POST = res -> user
+/register --> POST = res -> user
 /profile/:userId --> GET -> user
 /grocery --> PUT = res -> updated user
 
