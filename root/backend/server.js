@@ -3,6 +3,8 @@ const app = express();
 
 const PORT = 3001;
 
+app.use(express.json());
+
 const database = {
   users: [
     {
@@ -45,7 +47,12 @@ app.listen(PORT, () => {
 });
 
 app.post("/signin", (req, res) => {
-  res.json("signin");
+  if (
+    req.body.email === database.users[0].email &&
+    req.body.password === database.users[0].password
+  ) {
+    res.json("signin");
+  } else res.status(400).json("error login in");
 });
 
 /*
