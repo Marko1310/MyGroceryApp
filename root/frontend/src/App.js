@@ -65,6 +65,13 @@ function App() {
       setGrocerieList((prevGrocerieList) => {
         return [...prevGrocerieList, { title: input, id: id, edit: false }];
       });
+      fetch("http://localhost:3001/profile/123", {
+        method: "put",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          grocerie: { title: input, id: id, edit: false },
+        }),
+      });
     } else {
       setShowAlert(true);
     }

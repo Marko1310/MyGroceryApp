@@ -83,7 +83,7 @@ app.get("/profile/:id", (req, res) => {
   }
 });
 
-app.patch("/profile/:id", (req, res) => {
+app.put("/profile/:id", (req, res) => {
   const { id } = req.params;
   const { grocerie } = req.body;
   let found = false;
