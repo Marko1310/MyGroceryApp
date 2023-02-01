@@ -91,7 +91,7 @@ app.put("/profile/:id", (req, res) => {
     if (id === user.id) {
       found = true;
       user.groceries.push(grocerie);
-      return res.json(user);
+      return res.json(user.groceries);
     }
   });
   if (!found) {
