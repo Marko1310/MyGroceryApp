@@ -20,9 +20,11 @@ function App() {
   const [inputEdit, setInputEdit] = useState("");
 
   // state for list of groceries
-  const [grocerieList, setGrocerieList] = useState(() => {
-    return JSON.parse(localStorage.getItem("groceries")) || [];
-  });
+  // const [grocerieList, setGrocerieList] = useState(() => {
+  //   return JSON.parse(localStorage.getItem("groceries")) || [];
+  // });
+
+  const [grocerieList, setGrocerieList] = useState([]);
 
   // state for current user
   const [user, setUser] = useState({
@@ -32,10 +34,6 @@ function App() {
     groceries: [],
     joined: new Date(),
   });
-
-  useEffect(() => {
-    localStorage.setItem("groceries", JSON.stringify(grocerieList));
-  }, [grocerieList]);
 
   // state for enable/disable buttons
   const [currentBtn, setCurrentBtn] = useState(false);
