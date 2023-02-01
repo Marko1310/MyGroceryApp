@@ -29,7 +29,7 @@ const List = ({
                   className="submit-edit"
                   onChange={(e) => changeInputEdit(e)}
                 ></input>
-              )}{" "}
+              )}
               <div className="submit-buttons">
                 <button
                   className={

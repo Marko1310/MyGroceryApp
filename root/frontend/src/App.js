@@ -11,7 +11,7 @@ function App() {
   const [logged, setLogged] = useState(false);
 
   // state for login or sign up
-  const [Route, setRoute] = useState("login");
+  const [route, setRoute] = useState("login");
 
   // state for input field
   const [input, setInput] = useState("");
@@ -90,7 +90,7 @@ function App() {
         if (grocerieCopy[i].edit === true) {
           grocerieCopy.splice(i, 1, {
             ...grocerieList[i],
-            title: inputEdit,
+            title: inputEdit === "" ? grocerieCopy[i].title : inputEdit,
             edit: false,
           });
         } else
@@ -118,9 +118,9 @@ function App() {
 
   // function to switch between login and signup
   const switchRoute = function () {
-    if (Route === "signup") {
+    if (route === "signup") {
       setRoute("login");
-    } else if (Route === "login") {
+    } else if (route === "login") {
       setRoute("signup");
     }
   };
@@ -133,27 +133,27 @@ function App() {
   };
 
   // function to update current user
-  const updateUser = function (user) {
+  const updateUser = function (data) {
+    console.log(data);
     setUser({
-      id: user.id,
-      name: user.name,
-      email: user.email,
-      groceries: user.groceries,
+      id: data.id,
+      name: data.name,
+      email: data.email,
+      groceries: data.groceries,
       joined: new Date(),
     });
-    console.log(user);
   };
 
   return (
     <div>
-      {Route === "signup" && !logged && (
+      {route === "signup" && !logged && (
         <Signup
           changeLogged={changeLogged}
           switchRoute={switchRoute}
           updateUser={updateUser}
         />
       )}
-      {Route === "login" && !logged && (
+      {route === "login" && !logged && (
         <Login switchRoute={switchRoute} changeLogged={changeLogged} />
       )}
       {logged && (
