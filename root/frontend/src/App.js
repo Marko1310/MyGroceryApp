@@ -70,6 +70,7 @@ function App() {
         .then((response) => response.json())
         .then((data) => {
           setGrocerieList(data);
+          console.log(data);
         });
     } else {
       setShowAlert(true);
