@@ -9,32 +9,7 @@ app.use(cors());
 app.use(express.json());
 
 const database = {
-  users: [
-    {
-      id: "123",
-      name: "John",
-      email: "john@gmail.com",
-      password: "cookies",
-      groceries: [],
-      joined: new Date(),
-    },
-    {
-      id: "124",
-      name: "Sally",
-      email: "sally@gmail.com",
-      password: "apple",
-      groceries: [],
-      joined: new Date(),
-    },
-    {
-      id: "125",
-      name: "Ann",
-      email: "ann@gmail.com",
-      password: "banana",
-      groceries: [],
-      joined: new Date(),
-    },
-  ],
+  users: [],
 };
 
 app.get("/", (req, res) => {
@@ -55,8 +30,10 @@ app.post("/signin", (req, res) => {
 });
 
 app.post("/register", (req, res) => {
-  const id = database.users[database.users.length - 1].id * 1 + 1;
-  console.log(id);
+  const id =
+    database.users.length > 0
+      ? database.users[database.users.length - 1].id * 1 + 1
+      : 1;
   const { name, email, password } = req.body;
   database.users.push({
     id: JSON.stringify(id),
@@ -110,9 +87,7 @@ app.delete("/profile/:id", (req, res) => {
       const [grocerieToDelete] = user.groceries.filter(
         (el) => el.id === grocerieID
       );
-      const index = user.groceries.indexOf(grocerieToDelete);
-      user.groceries.splice(index, 1);
-      console.log(user.groceries);
+      user.groceries.splice(user.groceries.indexOf(grocerieToDelete), 1);
       res.status(200).json(user.groceries);
     }
   });
