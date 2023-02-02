@@ -98,7 +98,6 @@ function App() {
         console.log(data);
         setGrocerieList(data);
       });
-    // setGrocerieList(grocerieList.filter((el) => el.id !== id));
   };
 
   // change the state propertie of edit -> true/false by removing the element from the array and replacing with the new
