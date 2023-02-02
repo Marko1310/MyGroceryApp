@@ -11,7 +11,7 @@ function App() {
   const [logged, setLogged] = useState(false);
 
   // state for login or sign up
-  const [route, setRoute] = useState("login");
+  const [route, setRoute] = useState("signup");
 
   // state for input field
   const [input, setInput] = useState("");
@@ -24,8 +24,6 @@ function App() {
   //   return JSON.parse(localStorage.getItem("groceries")) || [];
   // });
 
-  const [grocerieList, setGrocerieList] = useState([]);
-
   // state for current user
   const [user, setUser] = useState({
     id: "",
@@ -34,6 +32,8 @@ function App() {
     groceries: [],
     joined: new Date(),
   });
+
+  const [grocerieList, setGrocerieList] = useState(user.groceries);
 
   // state for enable/disable buttons
   const [currentBtn, setCurrentBtn] = useState(false);
@@ -60,7 +60,7 @@ function App() {
 
     if (input !== "") {
       setShowAlert(false);
-      fetch("http://localhost:3001/profile/123", {
+      fetch(`http://localhost:3001/profile/${user.id}`, {
         method: "put",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -70,7 +70,6 @@ function App() {
         .then((response) => response.json())
         .then((data) => {
           setGrocerieList(data);
-          console.log(data);
         });
     } else {
       setShowAlert(true);
@@ -86,7 +85,20 @@ function App() {
   // function to delete item
   const deleteItem = function (id) {
     // filter items in array that id is not equal to selected id
-    setGrocerieList(grocerieList.filter((el) => el.id !== id));
+    const [grocerieToDelete] = grocerieList.filter((el) => el.id === id);
+    fetch(`http://localhost:3001/profile/${user.id}`, {
+      method: "delete",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(grocerieToDelete),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setGrocerieList(data);
+      });
+    // setGrocerieList(grocerieList.filter((el) => el.id !== id));
   };
 
   // change the state propertie of edit -> true/false by removing the element from the array and replacing with the new

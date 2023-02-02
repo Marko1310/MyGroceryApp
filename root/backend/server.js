@@ -59,7 +59,7 @@ app.post("/register", (req, res) => {
   console.log(id);
   const { name, email, password } = req.body;
   database.users.push({
-    id: id,
+    id: JSON.stringify(id),
     name: name,
     email: email,
     password: password,
@@ -99,36 +99,27 @@ app.put("/profile/:id", (req, res) => {
   }
 });
 
-app.post("/profile/:id", (req, res) => {
+app.delete("/profile/:id", (req, res) => {
   const { id } = req.params;
-  const { grocerieID } = req.body;
-  // console.log(req.body);
+  console.log(req.body);
+  const grocerieID = req.body.id;
+  console.log(grocerieID);
 
   let found = false;
   database.users.forEach((user) => {
     if (id === user.id) {
       found = true;
-      console.log(user.groceries);
-      const product = user.groceries.filter(
-        (item) => item.id * 1 === grocerieID * 1
+      const grocerieToDelete = user.groceries.filter(
+        (el) => el.id === grocerieID
       );
-      console.log(product[0].title);
-      // return res.json(user.groceries);
+      const index = user.groceries.indexOf(grocerieToDelete);
+      user.groceries.splice(index, 1);
+      res.status(200).json(user.groceries);
     }
-    // for (let i = 0; i < user.groceries.length; i++) {
-
-    // if (grocerieID === user.groceries.id[i]) {
-    //   console.log("ok");
-    // }
-    // }
-
-    // found = true;
-    // user.groceries.push(grocerie);
-    // return res.json(user.groceries);
   });
-  // if (!found) {
-  //   res.status(404).json("no such user");
-  // }
+  if (!found) {
+    res.status(404).json("no such user");
+  }
 });
 
 /*
