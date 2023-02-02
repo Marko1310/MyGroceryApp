@@ -101,19 +101,18 @@ app.put("/profile/:id", (req, res) => {
 
 app.delete("/profile/:id", (req, res) => {
   const { id } = req.params;
-  console.log(req.body);
   const grocerieID = req.body.id;
-  console.log(grocerieID);
 
   let found = false;
   database.users.forEach((user) => {
     if (id === user.id) {
       found = true;
-      const grocerieToDelete = user.groceries.filter(
+      const [grocerieToDelete] = user.groceries.filter(
         (el) => el.id === grocerieID
       );
       const index = user.groceries.indexOf(grocerieToDelete);
       user.groceries.splice(index, 1);
+      console.log(user.groceries);
       res.status(200).json(user.groceries);
     }
   });
