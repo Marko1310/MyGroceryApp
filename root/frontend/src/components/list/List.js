@@ -6,8 +6,8 @@ const List = ({
   deleteItem,
   emptyList,
   changeEdit,
+  input,
   changeInputEdit,
-  inputEdit,
   currentBtn,
   currentID,
 }) => {
@@ -25,7 +25,7 @@ const List = ({
                   id="grocery"
                   name="grocery"
                   placeholder={grocerie.title}
-                  value={inputEdit}
+                  value={input}
                   className="submit-edit"
                   onChange={(e) => changeInputEdit(e)}
                 ></input>

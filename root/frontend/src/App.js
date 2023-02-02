@@ -16,8 +16,11 @@ function App() {
   // state for input field
   const [input, setInput] = useState("");
 
-  // state for edit field
-  const [inputEdit, setInputEdit] = useState("");
+  // // state for edit field
+  // const [inputEdit, setInputEdit] = useState("");
+
+  // state for editing groceries
+  const [editing, setEditing] = useState(false);
 
   // state for list of groceries
   // const [grocerieList, setGrocerieList] = useState(() => {
@@ -38,7 +41,7 @@ function App() {
   // state for enable/disable buttons
   const [currentBtn, setCurrentBtn] = useState(false);
 
-  //state for current ID
+  //state for current grocerie list ID
   const [currentID, setCurrentID] = useState("");
 
   //state for showing the alert
@@ -51,7 +54,7 @@ function App() {
 
   // function to update the edit input state
   const changeInputEdit = function (e) {
-    setInputEdit(e.target.value);
+    setInput(e.target.value);
   };
 
   // function to add groceries
@@ -106,20 +109,23 @@ function App() {
     for (let i = 0; i < grocerieCopy.length; i++) {
       if (id === grocerieCopy[i].id) {
         if (grocerieCopy[i].edit === true) {
+          setEditing(false);
           grocerieCopy.splice(i, 1, {
             ...grocerieList[i],
-            title: inputEdit === "" ? grocerieCopy[i].title : inputEdit,
+            title: input === "" ? grocerieCopy[i].title : input,
             edit: false,
           });
-        } else
+        } else {
+          setEditing(true);
           grocerieCopy.splice(i, 1, {
             ...grocerieList[i],
             edit: true,
           });
+        }
       }
     }
     setGrocerieList(grocerieCopy);
-    setInputEdit("");
+    setInput("");
     setCurrentID(id);
     setCurrentBtn((prevState) => !prevState);
   };
@@ -186,14 +192,15 @@ function App() {
               addGrocerie={addGrocerie}
               input={input}
               grocerieList={grocerieList}
+              editing={editing}
             />
             <List
               grocerieList={grocerieList}
               deleteItem={deleteItem}
               emptyList={emptyList}
               changeEdit={changeEdit}
+              input={input}
               changeInput={changeInput}
-              inputEdit={inputEdit}
               changeInputEdit={changeInputEdit}
               currentBtn={currentBtn}
               currentID={currentID}

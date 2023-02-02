@@ -1,6 +1,6 @@
 import "./Submit.css";
 
-const Submit = ({ changeInput, addGrocerie, input }) => {
+const Submit = ({ changeInput, addGrocerie, input, editing }) => {
   return (
     <form
       className="submit-container"
@@ -14,9 +14,10 @@ const Submit = ({ changeInput, addGrocerie, input }) => {
         id="grocery"
         name="grocery"
         placeholder="e.g. banana"
-        value={input}
+        value={editing ? "" : input}
         className="submit-input"
         onChange={(e) => changeInput(e)}
+        disabled={editing}
       ></input>
       <input type="submit" value="Submit" className="submit-btn"></input>
     </form>
