@@ -1,42 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 import "./List.css";
+import GrocerieCard from "../grocerieCard/GrocerieCard";
 
 const List = ({
-  grocerieList,
+  user,
+  groceries,
   deleteItem,
   emptyList,
-  changeEdit,
+  changeGrocerie,
   input,
-  changeInputEdit,
+  changeInput,
   currentBtn,
   currentID,
+  editRef,
 }) => {
   return (
     <div className="grocery-list-container">
-      {grocerieList.map((grocerie) => {
+      {groceries.map((eachGrocerie) => {
+        return <GrocerieCard eachGrocerie={eachGrocerie} />;
+      })}
+
+      {/* {grocerieList.map((grocerie) => {
         return (
           <ul key={grocerie.id}>
             <li className="grocery-list-item">
               {grocerie.edit === false ? (
                 <div>{grocerie.title}</div>
-              ) : (
-                <input
-                  type="text"
-                  id="grocery"
-                  name="grocery"
-                  placeholder={grocerie.title}
-                  value={input}
-                  className="submit-edit"
-                  onChange={(e) => changeInputEdit(e)}
-                ></input>
-              )}
+              ) : ( *
+              <input
+                ref={editRef}
+                type="text"
+                placeholder={grocerie.title}
+                value={input}
+                className="submit-edit"
+                onChange={(e) => changeInput(e)}
+                readOnly={grocerie.edit}  
+              ></input>
               <div className="submit-buttons">
                 <button
                   className={
                     grocerie.edit ? `submit-btn confirm` : `submit-btn edit`
                   }
-                  onClick={(e) => {
-                    changeEdit(grocerie.id);
+                  onClick={() => {
+                    changeGrocerie(grocerie.id);
                   }}
                   disabled={currentID !== grocerie.id && currentBtn}
                 >
@@ -52,8 +58,14 @@ const List = ({
               </div>
             </li>
           </ul>
+
+
+
+
+
+
         );
-      })}
+      })} */}
       <div className="clear-btn" onClick={emptyList}>
         Clear list
       </div>

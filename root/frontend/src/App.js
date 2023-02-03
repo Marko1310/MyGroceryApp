@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import List from "./components/list/List";
 import Alert from "./components/alert/Alert";
 import Navbar from "./components/navbar/Navbar";
@@ -36,7 +36,10 @@ function App() {
     joined: new Date(),
   });
 
-  const [grocerieList, setGrocerieList] = useState(user.groceries);
+  // state for grocerie list
+  const [groceries, setGroceries] = useState(user.groceries);
+
+  // const [grocerieList, setGrocerieList] = useState(user.groceries);
 
   // state for enable/disable buttons
   const [currentBtn, setCurrentBtn] = useState(false);
@@ -46,6 +49,8 @@ function App() {
 
   //state for showing the alert
   const [showAlert, setShowAlert] = useState(null);
+
+  const editRef = useRef(null);
 
   // function to update the input state field when entering the que
   const changeInput = function (e) {
@@ -72,7 +77,7 @@ function App() {
       })
         .then((response) => response.json())
         .then((data) => {
-          setGrocerieList(data);
+          setGroceries(data);
         });
     } else {
       setShowAlert(true);
@@ -81,54 +86,56 @@ function App() {
   };
 
   // function to remove all groceries
-  const emptyList = function () {
-    setGrocerieList([]);
-  };
+  // const emptyList = function () {
+  //   setGrocerieList([]);
+  // };
 
   // function to delete item
-  const deleteItem = function (id) {
-    // filter items in array that id is not equal to selected id
-    const [grocerieToDelete] = grocerieList.filter((el) => el.id === id);
-    fetch(`http://localhost:3001/profile/${user.id}`, {
-      method: "delete",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(grocerieToDelete),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        setGrocerieList(data);
-      });
-  };
+  // const deleteItem = function (id) {
+  //   // filter items in array that id is not equal to selected id
+  //   const [grocerieToDelete] = grocerieList.filter((el) => el.id === id);
+  //   fetch(`http://localhost:3001/profile/${user.id}`, {
+  //     method: "delete",
+  //     headers: {
+  //       "Content-type": "application/json",
+  //     },
+  //     body: JSON.stringify(grocerieToDelete),
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //       setGrocerieList(data);
+  //     });
+  // };
 
   // change the state propertie of edit -> true/false by removing the element from the array and replacing with the new
-  const changeEdit = function (id) {
-    const grocerieCopy = [...grocerieList];
-    for (let i = 0; i < grocerieCopy.length; i++) {
-      if (id === grocerieCopy[i].id) {
-        if (grocerieCopy[i].edit === true) {
-          setEditing(false);
-          grocerieCopy.splice(i, 1, {
-            ...grocerieList[i],
-            title: input === "" ? grocerieCopy[i].title : input,
-            edit: false,
-          });
-        } else {
-          setEditing(true);
-          grocerieCopy.splice(i, 1, {
-            ...grocerieList[i],
-            edit: true,
-          });
-        }
-      }
-    }
-    setGrocerieList(grocerieCopy);
-    setInput("");
-    setCurrentID(id);
-    setCurrentBtn((prevState) => !prevState);
-  };
+  // const changeGrocerie = function (id) {
+  //   editRef.current.focus();
+  //   console.log(editRef.current);
+  //   const grocerieCopy = [...grocerieList];
+  //   for (let i = 0; i < grocerieCopy.length; i++) {
+  //     if (id === grocerieCopy[i].id) {
+  //       if (grocerieCopy[i].edit === true) {
+  //         setEditing(false);
+  //         grocerieCopy.splice(i, 1, {
+  //           ...grocerieList[i],
+  //           title: input === "" ? grocerieCopy[i].title : input,
+  //           edit: false,
+  //         });
+  //       } else {
+  //         setEditing(true);
+  //         grocerieCopy.splice(i, 1, {
+  //           ...grocerieList[i],
+  //           edit: true,
+  //         });
+  //       }
+  //     }
+  //   }
+  //   setGrocerieList(grocerieCopy);
+  //   setInput("");
+  //   setCurrentID(id);
+  //   setCurrentBtn((prevState) => !prevState);
+  // };
 
   // function to remove alert
   const removeALert = function () {
@@ -191,19 +198,22 @@ function App() {
               changeInput={changeInput}
               addGrocerie={addGrocerie}
               input={input}
-              grocerieList={grocerieList}
+              // grocerieList={groceries}
               editing={editing}
             />
             <List
-              grocerieList={grocerieList}
-              deleteItem={deleteItem}
-              emptyList={emptyList}
-              changeEdit={changeEdit}
+              user={user}
+              groceries={groceries}
+              // grocerieList={grocerieList}
+              // deleteItem={deleteItem}
+              // emptyList={emptyList}
+              // changeGrocerie={changeGrocerie}
               input={input}
               changeInput={changeInput}
               changeInputEdit={changeInputEdit}
               currentBtn={currentBtn}
               currentID={currentID}
+              editRef={editRef}
             />
           </div>
         </div>
