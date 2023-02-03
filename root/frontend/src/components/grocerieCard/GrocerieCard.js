@@ -2,12 +2,14 @@ import React, { useState, useRef } from "react";
 import "./GrocerieCard.css";
 
 const GrocerieCard = ({ eachGrocerie, deleteItem }) => {
-  console.log(eachGrocerie);
-
   const [content, setContent] = useState(eachGrocerie.title);
   const id = eachGrocerie.id;
   const [edit, setEdit] = useState(false);
   const input = useRef(null);
+
+  const changeContent = function (id) {
+    input.current.focus();
+  };
 
   return (
     <div className="grocery-list-item">
@@ -17,7 +19,8 @@ const GrocerieCard = ({ eachGrocerie, deleteItem }) => {
       <input
         ref={input}
         type="text"
-        placeholder={content}
+        onFocus={(e) => (e.target.value = "")}
+        // placeholder=""
         value={content}
         className="submit-edit"
         onChange={(e) => setContent(e.target.value)}
@@ -27,6 +30,7 @@ const GrocerieCard = ({ eachGrocerie, deleteItem }) => {
         <button
           className={edit ? `submit-btn confirm` : `submit-btn edit`}
           onClick={() => {
+            changeContent(id);
             // changeGrocerie(grocerie.id);
           }}
           // disabled={currentID !== grocerie.id && currentBtn}
