@@ -17,7 +17,9 @@ const List = ({
   return (
     <div className="grocery-list-container">
       {groceries.map((eachGrocerie) => {
-        return <GrocerieCard eachGrocerie={eachGrocerie} />;
+        return (
+          <GrocerieCard eachGrocerie={eachGrocerie} deleteItem={deleteItem} />
+        );
       })}
 
       {/* {grocerieList.map((grocerie) => {

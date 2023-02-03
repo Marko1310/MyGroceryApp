@@ -91,22 +91,23 @@ function App() {
   // };
 
   // function to delete item
-  // const deleteItem = function (id) {
-  //   // filter items in array that id is not equal to selected id
-  //   const [grocerieToDelete] = grocerieList.filter((el) => el.id === id);
-  //   fetch(`http://localhost:3001/profile/${user.id}`, {
-  //     method: "delete",
-  //     headers: {
-  //       "Content-type": "application/json",
-  //     },
-  //     body: JSON.stringify(grocerieToDelete),
-  //   })
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //       setGrocerieList(data);
-  //     });
-  // };
+  const deleteItem = function (id) {
+    console.log(id);
+    // filter items in array that id is not equal to selected id
+    const [grocerieToDelete] = groceries.filter((el) => el.id === id);
+    fetch(`http://localhost:3001/profile/${user.id}`, {
+      method: "delete",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(grocerieToDelete),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setGroceries(data);
+      });
+  };
 
   // change the state propertie of edit -> true/false by removing the element from the array and replacing with the new
   // const changeGrocerie = function (id) {
@@ -205,7 +206,7 @@ function App() {
               user={user}
               groceries={groceries}
               // grocerieList={grocerieList}
-              // deleteItem={deleteItem}
+              deleteItem={deleteItem}
               // emptyList={emptyList}
               // changeGrocerie={changeGrocerie}
               input={input}

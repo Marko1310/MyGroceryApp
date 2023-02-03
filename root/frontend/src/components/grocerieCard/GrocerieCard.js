@@ -1,10 +1,11 @@
 import React, { useState, useRef } from "react";
 import "./GrocerieCard.css";
 
-const GrocerieCard = ({ eachGrocerie }) => {
+const GrocerieCard = ({ eachGrocerie, deleteItem }) => {
   console.log(eachGrocerie);
 
   const [content, setContent] = useState(eachGrocerie.title);
+  const id = eachGrocerie.id;
   const [edit, setEdit] = useState(false);
   const input = useRef(null);
 
@@ -33,10 +34,7 @@ const GrocerieCard = ({ eachGrocerie }) => {
           {edit ? "Confirm" : "Edit"}
         </button>
 
-        <button
-          className="submit-btn delete"
-          // onClick={() => deleteItem(grocerie.id)}
-        >
+        <button className="submit-btn delete" onClick={() => deleteItem(id)}>
           Delete
         </button>
       </div>
