@@ -3,12 +3,17 @@ import "./GrocerieCard.css";
 
 const GrocerieCard = ({ eachGrocerie, deleteItem }) => {
   const [content, setContent] = useState(eachGrocerie.title);
+  const [editContent, setEditContent] = useState(content);
   const id = eachGrocerie.id;
   const [edit, setEdit] = useState(false);
   const input = useRef(null);
 
-  const changeContent = function (id) {
+  const changeContent = function () {
     input.current.focus();
+    setEdit(edit ? false : true);
+    if (!edit) setContent("");
+    setEditContent(content);
+    if (content === "") setContent(editContent);
   };
 
   return (
@@ -19,20 +24,19 @@ const GrocerieCard = ({ eachGrocerie, deleteItem }) => {
       <input
         ref={input}
         type="text"
-        onFocus={(e) => (e.target.value = "")}
-        // placeholder=""
+        placeholder={editContent}
         value={content}
         className="submit-edit"
         onChange={(e) => setContent(e.target.value)}
-        readOnly={edit}
+        readOnly={!edit}
       ></input>
       <div className="submit-buttons">
         <button
           className={edit ? `submit-btn confirm` : `submit-btn edit`}
-          onClick={() => {
-            changeContent(id);
+          onClick={
+            changeContent
             // changeGrocerie(grocerie.id);
-          }}
+          }
           // disabled={currentID !== grocerie.id && currentBtn}
         >
           {edit ? "Confirm" : "Edit"}
