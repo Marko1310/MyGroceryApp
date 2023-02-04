@@ -3,7 +3,7 @@ import "./GrocerieCard.css";
 
 const GrocerieCard = ({ eachGrocerie, deleteItem }) => {
   const [content, setContent] = useState(eachGrocerie.title);
-  const [editContent, setEditContent] = useState(content);
+  const [prevContent, setPrevContent] = useState(content);
   const id = eachGrocerie.id;
   const [edit, setEdit] = useState(false);
   const input = useRef(null);
@@ -12,8 +12,8 @@ const GrocerieCard = ({ eachGrocerie, deleteItem }) => {
     input.current.focus();
     setEdit(edit ? false : true);
     if (!edit) setContent("");
-    setEditContent(content);
-    if (content === "") setContent(editContent);
+    setPrevContent(content);
+    if (content === "") setContent(prevContent);
   };
 
   return (
@@ -24,7 +24,7 @@ const GrocerieCard = ({ eachGrocerie, deleteItem }) => {
       <input
         ref={input}
         type="text"
-        placeholder={editContent}
+        placeholder={prevContent}
         value={content}
         className="submit-edit"
         onChange={(e) => setContent(e.target.value)}
