@@ -16,9 +16,6 @@ function App() {
   // state for input field
   const [input, setInput] = useState("");
 
-  // // state for edit field
-  // const [inputEdit, setInputEdit] = useState("");
-
   // state for editing groceries
   const [editing, setEditing] = useState(false);
 
@@ -86,9 +83,13 @@ function App() {
   };
 
   // function to remove all groceries
-  // const emptyList = function () {
-  //   setGrocerieList([]);
-  // };
+  const emptyList = function () {
+    fetch(`http://localhost:3001/profile/${user.id}/clearList`, {
+      method: "delete",
+    })
+      .then((response) => response.json())
+      .then((data) => setGroceries(data));
+  };
 
   // function to delete item
   const deleteGrocerie = function (data) {
@@ -100,35 +101,6 @@ function App() {
   const editGrocerieList = function (data) {
     setGroceries(data);
   };
-
-  // change the state propertie of edit -> true/false by removing the element from the array and replacing with the new
-  // const changeGrocerie = function (id) {
-  //   editRef.current.focus();
-  //   console.log(editRef.current);
-  //   const grocerieCopy = [...grocerieList];
-  //   for (let i = 0; i < grocerieCopy.length; i++) {
-  //     if (id === grocerieCopy[i].id) {
-  //       if (grocerieCopy[i].edit === true) {
-  //         setEditing(false);
-  //         grocerieCopy.splice(i, 1, {
-  //           ...grocerieList[i],
-  //           title: input === "" ? grocerieCopy[i].title : input,
-  //           edit: false,
-  //         });
-  //       } else {
-  //         setEditing(true);
-  //         grocerieCopy.splice(i, 1, {
-  //           ...grocerieList[i],
-  //           edit: true,
-  //         });
-  //       }
-  //     }
-  //   }
-  //   setGrocerieList(grocerieCopy);
-  //   setInput("");
-  //   setCurrentID(id);
-  //   setCurrentBtn((prevState) => !prevState);
-  // };
 
   // function to remove alert
   const removeALert = function () {
@@ -199,7 +171,7 @@ function App() {
               groceries={groceries}
               // grocerieList={grocerieList}
               deleteGrocerie={deleteGrocerie}
-              // emptyList={emptyList}
+              emptyList={emptyList}
               editGrocerieList={editGrocerieList}
               input={input}
               changeInput={changeInput}

@@ -81,10 +81,6 @@ app.put("/profile/:id/newGrocerie", (req, res) => {
   }
 });
 
-// app.get("/profile/:id/editgrocerie", (req, res) => {
-//   console.log("hello");
-// });
-
 //edit grocerie
 app.put("/profile/:id/editgrocerie", (req, res) => {
   const { id } = req.params;
@@ -120,6 +116,22 @@ app.delete("/profile/:id/delete", (req, res) => {
         return el.id == grocerie_id;
       });
       user.groceries.splice(user.groceries.indexOf(grocerieToDelete), 1);
+      res.status(200).json(user.groceries);
+    }
+  });
+  if (!found) {
+    res.status(404).json("no such user");
+  }
+});
+
+app.delete("/profile/:id/clearList", (req, res) => {
+  const { id } = req.params;
+
+  let found = false;
+  database.users.forEach((user) => {
+    if (id === user.id) {
+      found = true;
+      user.groceries = [];
       res.status(200).json(user.groceries);
     }
   });
