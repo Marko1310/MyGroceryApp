@@ -139,12 +139,3 @@ app.delete("/profile/:id/clearList", (req, res) => {
     res.status(404).json("no such user");
   }
 });
-
-/*
-/ --> res = this is working
-/signin --> POST --> res = seccess, fail
-/register --> POST = res -> user
-/profile/:userId --> GET -> user
-/grocery --> PUT = res -> updated user
-
-*/

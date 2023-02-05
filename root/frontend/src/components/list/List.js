@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./List.css";
 import GrocerieCard from "../grocerieCard/GrocerieCard";
 
@@ -8,11 +8,6 @@ const List = ({
   deleteGrocerie,
   emptyList,
   editGrocerieList,
-  input,
-  changeInput,
-  currentBtn,
-  currentID,
-  editRef,
 }) => {
   return (
     <div className="grocery-list-container">

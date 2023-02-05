@@ -16,14 +16,6 @@ function App() {
   // state for input field
   const [input, setInput] = useState("");
 
-  // state for editing groceries
-  const [editing, setEditing] = useState(false);
-
-  // state for list of groceries
-  // const [grocerieList, setGrocerieList] = useState(() => {
-  //   return JSON.parse(localStorage.getItem("groceries")) || [];
-  // });
-
   // state for current user
   const [user, setUser] = useState({
     id: "",
@@ -36,26 +28,11 @@ function App() {
   // state for grocerie list
   const [groceries, setGroceries] = useState(user.groceries);
 
-  // const [grocerieList, setGrocerieList] = useState(user.groceries);
-
-  // state for enable/disable buttons
-  const [currentBtn, setCurrentBtn] = useState(false);
-
-  //state for current grocerie list ID
-  const [currentID, setCurrentID] = useState("");
-
   //state for showing the alert
   const [showAlert, setShowAlert] = useState(null);
 
-  const editRef = useRef(null);
-
   // function to update the input state field when entering the que
   const changeInput = function (e) {
-    setInput(e.target.value);
-  };
-
-  // function to update the edit input state
-  const changeInputEdit = function (e) {
     setInput(e.target.value);
   };
 
@@ -69,7 +46,7 @@ function App() {
         method: "put",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          grocerie: { title: input, id: id, edit: false },
+          grocerie: { title: input, id: id },
         }),
       })
         .then((response) => response.json())
@@ -130,7 +107,6 @@ function App() {
 
   // function to update current user
   const updateUser = function (data) {
-    console.log(data);
     setUser({
       id: data.id,
       name: data.name,
@@ -163,22 +139,15 @@ function App() {
               changeInput={changeInput}
               addGrocerie={addGrocerie}
               input={input}
-              // grocerieList={groceries}
-              editing={editing}
             />
             <List
               user={user}
               groceries={groceries}
-              // grocerieList={grocerieList}
               deleteGrocerie={deleteGrocerie}
               emptyList={emptyList}
               editGrocerieList={editGrocerieList}
               input={input}
               changeInput={changeInput}
-              changeInputEdit={changeInputEdit}
-              currentBtn={currentBtn}
-              currentID={currentID}
-              editRef={editRef}
             />
           </div>
         </div>
