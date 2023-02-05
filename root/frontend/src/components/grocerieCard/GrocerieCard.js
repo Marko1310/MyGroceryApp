@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import "./GrocerieCard.css";
 
-const GrocerieCard = ({ eachGrocerie, deleteItem }) => {
+const GrocerieCard = ({ eachGrocerie, deleteItem, user }) => {
   const [content, setContent] = useState(eachGrocerie.title);
   const [prevContent, setPrevContent] = useState(content);
   const id = eachGrocerie.id;
@@ -9,11 +9,21 @@ const GrocerieCard = ({ eachGrocerie, deleteItem }) => {
   const input = useRef(null);
 
   const changeContent = function () {
+    // console.log(typeof JSON.parse(content));
     input.current.focus();
     setEdit(edit ? false : true);
-    if (!edit) setContent("");
-    setPrevContent(content);
-    if (content === "") setContent(prevContent);
+    if (!edit) {
+      setContent("");
+    } else {
+      setPrevContent(content);
+      if (content === "") setContent(prevContent);
+
+      fetch(`http://localhost:3001/profile/1/editgrocerie`, {
+        method: "put",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({ title: content, grocerie_id: id }),
+      });
+    }
   };
 
   return (
@@ -34,7 +44,7 @@ const GrocerieCard = ({ eachGrocerie, deleteItem }) => {
         <button
           className={edit ? `submit-btn confirm` : `submit-btn edit`}
           onClick={
-            changeContent
+            () => changeContent()
             // changeGrocerie(grocerie.id);
           }
           // disabled={currentID !== grocerie.id && currentBtn}

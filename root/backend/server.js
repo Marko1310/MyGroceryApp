@@ -1,12 +1,15 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const bodyParser = require("body-parser");
 
 const PORT = 3001;
 
 app.use(cors());
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.text());
 
 const database = {
   users: [],
@@ -20,6 +23,7 @@ app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
 
+// signin route
 app.post("/signin", (req, res) => {
   if (
     req.body.email === database.users[0].email &&
@@ -29,6 +33,7 @@ app.post("/signin", (req, res) => {
   } else res.status(400).json("error login in");
 });
 
+//register route
 app.post("/register", (req, res) => {
   const id =
     database.users.length > 0
@@ -46,6 +51,7 @@ app.post("/register", (req, res) => {
   res.json(database.users[database.users.length - 1]);
 });
 
+// get specific user
 app.get("/profile/:id", (req, res) => {
   const { id } = req.params;
   let found = false;
@@ -60,7 +66,8 @@ app.get("/profile/:id", (req, res) => {
   }
 });
 
-app.put("/profile/:id", (req, res) => {
+//add new grocerie
+app.put("/profile/:id/newGrocerie", (req, res) => {
   const { id } = req.params;
   const { grocerie } = req.body;
   let found = false;
@@ -76,7 +83,36 @@ app.put("/profile/:id", (req, res) => {
   }
 });
 
-app.delete("/profile/:id", (req, res) => {
+// app.get("/profile/:id/editgrocerie", (req, res) => {
+//   console.log("hello");
+// });
+
+//edit grocerie
+app.put("/profile/:id/editgrocerie", (req, res) => {
+  const { id } = req.params;
+  console.log(req.body);
+  const { title, grocerie_id } = req.body;
+  let found = false;
+  database.users.forEach((user) => {
+    if (id === user.id) {
+      found = true;
+      user.groceries[0].title = title;
+      const [grocerieToEdit] = user.groceries.filter(
+        (el) => el.title === modifiedGrocerie
+      );
+      grocerieToEdit.title = modifiedGrocerie;
+      res.status(200).json(user.groceries);
+    }
+  });
+  if (!found) {
+    res.status(404).json("no such user");
+  }
+});
+
+//delete specific grocerie
+app.delete("/profile/:id/delete", (req, res) => {
+  console.log(req.body);
+
   const { id } = req.params;
   const grocerieID = req.body.id;
 

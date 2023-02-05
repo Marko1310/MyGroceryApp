@@ -68,7 +68,7 @@ function App() {
 
     if (input !== "") {
       setShowAlert(false);
-      fetch(`http://localhost:3001/profile/${user.id}`, {
+      fetch(`http://localhost:3001/profile/${user.id}/newGrocerie`, {
         method: "put",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -95,7 +95,8 @@ function App() {
     console.log(id);
     // filter items in array that id is not equal to selected id
     const [grocerieToDelete] = groceries.filter((el) => el.id === id);
-    fetch(`http://localhost:3001/profile/${user.id}`, {
+
+    fetch(`http://localhost:3001/profile/${user.id}/delete`, {
       method: "delete",
       headers: {
         "Content-type": "application/json",

@@ -18,7 +18,11 @@ const List = ({
     <div className="grocery-list-container">
       {groceries.map((eachGrocerie) => {
         return (
-          <GrocerieCard eachGrocerie={eachGrocerie} deleteItem={deleteItem} />
+          <GrocerieCard
+            eachGrocerie={eachGrocerie}
+            deleteItem={deleteItem}
+            user={user}
+          />
         );
       })}
 
