@@ -1,7 +1,12 @@
 import React, { useState, useRef } from "react";
 import "./GrocerieCard.css";
 
-const GrocerieCard = ({ eachGrocerie, deleteItem, user, editGrocerieList }) => {
+const GrocerieCard = ({
+  eachGrocerie,
+  user,
+  editGrocerieList,
+  deleteGrocerie,
+}) => {
   const [content, setContent] = useState(eachGrocerie.title);
   const id = eachGrocerie.id;
   const [edit, setEdit] = useState(false);
@@ -14,7 +19,6 @@ const GrocerieCard = ({ eachGrocerie, deleteItem, user, editGrocerieList }) => {
       setContent("");
     } else {
       if (content === "") setContent(eachGrocerie.title);
-
       fetch(`http://localhost:3001/profile/${user.id}/editgrocerie`, {
         method: "put",
         headers: { "Content-type": "application/json" },
@@ -25,6 +29,18 @@ const GrocerieCard = ({ eachGrocerie, deleteItem, user, editGrocerieList }) => {
           editGrocerieList(data);
         });
     }
+  };
+
+  const deleteCard = function () {
+    fetch(`http://localhost:3001/profile/${user.id}/delete`, {
+      method: "delete",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({ grocerie_id: id }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        deleteGrocerie(data);
+      });
   };
 
   return (
@@ -46,7 +62,7 @@ const GrocerieCard = ({ eachGrocerie, deleteItem, user, editGrocerieList }) => {
           {edit ? "Confirm" : "Edit"}
         </button>
 
-        <button className="submit-btn delete" onClick={() => deleteItem(id)}>
+        <button className="submit-btn delete" onClick={() => deleteCard()}>
           Delete
         </button>
       </div>

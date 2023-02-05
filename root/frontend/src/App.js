@@ -91,21 +91,9 @@ function App() {
   // };
 
   // function to delete item
-  const deleteItem = function (id) {
-    // filter items in array that id is not equal to selected id
-    const [grocerieToDelete] = groceries.filter((el) => el.id === id);
-
-    fetch(`http://localhost:3001/profile/${user.id}/delete`, {
-      method: "delete",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(grocerieToDelete),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setGroceries(data);
-      });
+  const deleteGrocerie = function (data) {
+    console.log(data);
+    setGroceries(data);
   };
 
   // function to edit grocerie list
@@ -210,7 +198,7 @@ function App() {
               user={user}
               groceries={groceries}
               // grocerieList={grocerieList}
-              deleteItem={deleteItem}
+              deleteGrocerie={deleteGrocerie}
               // emptyList={emptyList}
               editGrocerieList={editGrocerieList}
               input={input}

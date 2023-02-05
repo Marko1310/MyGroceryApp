@@ -1,15 +1,13 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const bodyParser = require("body-parser");
 
 const PORT = 3001;
 
 app.use(cors());
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(bodyParser.text());
+app.use(express.urlencoded());
 
 const database = {
   users: [],
@@ -111,18 +109,16 @@ app.put("/profile/:id/editgrocerie", (req, res) => {
 
 //delete specific grocerie
 app.delete("/profile/:id/delete", (req, res) => {
-  console.log(req.body);
-
   const { id } = req.params;
-  const grocerieID = req.body.id;
+  const { grocerie_id } = req.body;
 
   let found = false;
   database.users.forEach((user) => {
     if (id === user.id) {
       found = true;
-      const [grocerieToDelete] = user.groceries.filter(
-        (el) => el.id === grocerieID
-      );
+      const [grocerieToDelete] = user.groceries.filter((el) => {
+        return el.id == grocerie_id;
+      });
       user.groceries.splice(user.groceries.indexOf(grocerieToDelete), 1);
       res.status(200).json(user.groceries);
     }

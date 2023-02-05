@@ -5,7 +5,7 @@ import GrocerieCard from "../grocerieCard/GrocerieCard";
 const List = ({
   user,
   groceries,
-  deleteItem,
+  deleteGrocerie,
   emptyList,
   editGrocerieList,
   input,
@@ -19,8 +19,9 @@ const List = ({
       {groceries.map((eachGrocerie) => {
         return (
           <GrocerieCard
+            key={eachGrocerie.id}
             eachGrocerie={eachGrocerie}
-            deleteItem={deleteItem}
+            deleteGrocerie={deleteGrocerie}
             user={user}
             editGrocerieList={editGrocerieList}
           />
