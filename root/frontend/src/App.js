@@ -92,7 +92,6 @@ function App() {
 
   // function to delete item
   const deleteItem = function (id) {
-    console.log(id);
     // filter items in array that id is not equal to selected id
     const [grocerieToDelete] = groceries.filter((el) => el.id === id);
 
@@ -105,9 +104,13 @@ function App() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setGroceries(data);
       });
+  };
+
+  // function to edit grocerie list
+  const editGrocerieList = function (data) {
+    setGroceries(data);
   };
 
   // change the state propertie of edit -> true/false by removing the element from the array and replacing with the new
@@ -209,7 +212,7 @@ function App() {
               // grocerieList={grocerieList}
               deleteItem={deleteItem}
               // emptyList={emptyList}
-              // changeGrocerie={changeGrocerie}
+              editGrocerieList={editGrocerieList}
               input={input}
               changeInput={changeInput}
               changeInputEdit={changeInputEdit}

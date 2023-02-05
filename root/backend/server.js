@@ -90,7 +90,7 @@ app.put("/profile/:id/newGrocerie", (req, res) => {
 //edit grocerie
 app.put("/profile/:id/editgrocerie", (req, res) => {
   const { id } = req.params;
-  console.log(req.body);
+  console.log(req);
   const { title, grocerie_id } = req.body;
   let found = false;
   database.users.forEach((user) => {

@@ -7,7 +7,7 @@ const List = ({
   groceries,
   deleteItem,
   emptyList,
-  changeGrocerie,
+  editGrocerieList,
   input,
   changeInput,
   currentBtn,
@@ -22,6 +22,7 @@ const List = ({
             eachGrocerie={eachGrocerie}
             deleteItem={deleteItem}
             user={user}
+            editGrocerieList={editGrocerieList}
           />
         );
       })}
