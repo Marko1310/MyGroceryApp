@@ -1,6 +1,18 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const knex = require("knex");
+
+const db = knex({
+  client: "pg",
+  connection: {
+    host: "127.0.0.1",
+    port: 5432,
+    user: "marko",
+    password: "",
+    database: "grocerie",
+  },
+});
 
 const PORT = 3001;
 
@@ -33,20 +45,31 @@ app.post("/signin", (req, res) => {
 
 //register route
 app.post("/register", (req, res) => {
-  const id =
-    database.users.length > 0
-      ? database.users[database.users.length - 1].id * 1 + 1
-      : 1;
+  // const id =
+  //   database.users.length > 0
+  //     ? database.users[database.users.length - 1].id * 1 + 1
+  //     : 1;
   const { name, email, password } = req.body;
-  database.users.push({
-    id: JSON.stringify(id),
-    name: name,
-    email: email,
-    password: password,
-    groceries: [],
-    joined: new Date(),
-  });
-  res.json(database.users[database.users.length - 1]);
+  // database.users.push({
+  //   id: JSON.stringify(id),
+  //   name: name,
+  //   email: email,
+  //   password: password,
+  //   groceries: [],
+  //   joined: new Date(),
+  // });
+
+  db("users")
+    .returning("*")
+    .insert({
+      name: name,
+      email: email,
+      joined: new Date(),
+    })
+    .then((user) => {
+      res.json(user[0]);
+    })
+    .catch((err) => res.status(400).json("unable to register"));
 });
 
 // get specific user
