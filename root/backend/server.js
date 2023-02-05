@@ -96,11 +96,11 @@ app.put("/profile/:id/editgrocerie", (req, res) => {
   database.users.forEach((user) => {
     if (id === user.id) {
       found = true;
-      user.groceries[0].title = title;
-      const [grocerieToEdit] = user.groceries.filter(
-        (el) => el.title === modifiedGrocerie
-      );
-      grocerieToEdit.title = modifiedGrocerie;
+      user.groceries.forEach((grocerie) => {
+        if (grocerie_id === grocerie.id) {
+          grocerie.title = title;
+        }
+      });
       res.status(200).json(user.groceries);
     }
   });
