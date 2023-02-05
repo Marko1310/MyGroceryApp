@@ -90,24 +90,14 @@ app.get("/profile/:id", (req, res) => {
 //add new grocerie
 app.put("/profile/:id/newGrocerie", (req, res) => {
   const { id } = req.params;
-  const { grocerie } = req.body.grocerie;
-  let found = false;
-  db.where("id", "=", id)
+  const { grocerie } = req.body;
+  db("users")
+    .where("id", "=", id)
     .update({
-      groceries: knex.raw("array_append(groceries, ?)", [grocerie]),
+      groceries: db.raw("array_append(groceries, ?)", [grocerie]),
     })
-    .then((user) => console.log(user));
-
-  // database.users.forEach((user) => {
-  //   if (id === user.id) {
-  //     found = true;
-  //     user.groceries.push(grocerie);
-  //     return res.json(user.groceries);
-  //   }
-  // });
-  // if (!found) {
-  //   res.status(404).json("no such user");
-  // }
+    .then((user) => res.json(user))
+    .catch((err) => res.json("grocerie is not in valid format"));
 });
 
 //edit grocerie
