@@ -37,7 +37,7 @@ function App() {
 
   // function to add groceries
   const addGrocerie = function () {
-    const id = Math.random();
+    // const id = Math.random();
 
     if (input !== "") {
       setShowAlert(false);
@@ -45,13 +45,12 @@ function App() {
         method: "put",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          grocerie: { title: input },
+          title: input,
         }),
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
-          setGroceries(data);
+          setGroceries((prevGroceries) => [...prevGroceries, data]);
         });
     } else {
       setShowAlert(true);

@@ -14,7 +14,7 @@ const List = ({
       {groceries.map((eachGrocerie) => {
         return (
           <GrocerieCard
-            key={eachGrocerie.id}
+            key={eachGrocerie.user_id}
             eachGrocerie={eachGrocerie}
             deleteGrocerie={deleteGrocerie}
             user={user}

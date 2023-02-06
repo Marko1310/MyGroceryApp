@@ -105,7 +105,10 @@ app.put("/profile/:id/newGrocerie", (req, res) => {
       title: title,
       user_id: id,
     })
-    .then((grocerie) => res.json(grocerie))
+    .then((grocerie) => {
+      console.log(grocerie[0]);
+      res.status(200).json(grocerie[0]);
+    })
     .catch((err) => res.json(err));
 });
 
