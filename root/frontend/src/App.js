@@ -21,12 +21,11 @@ function App() {
     id: "",
     name: "",
     email: "",
-    groceries: [],
     joined: new Date(),
   });
 
   // state for grocerie list
-  const [groceries, setGroceries] = useState(user.groceries);
+  const [groceries, setGroceries] = useState([]);
 
   //state for showing the alert
   const [showAlert, setShowAlert] = useState(null);
@@ -46,11 +45,12 @@ function App() {
         method: "put",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          grocerie: { title: input, grocerie_id: id },
+          grocerie: { title: input },
         }),
       })
         .then((response) => response.json())
         .then((data) => {
+          console.log(data);
           setGroceries(data);
         });
     } else {

@@ -26,7 +26,8 @@ function Signup({ changeLogged, switchRoute, updateUser }) {
           updateUser(user);
           changeLogged();
         }
-      });
+      })
+      .catch((err) => console.log(err));
   };
 
   const changeName = function (e) {

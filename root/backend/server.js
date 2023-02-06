@@ -98,16 +98,16 @@ app.get("/profile/:id", (req, res) => {
 //add new grocerie
 app.put("/profile/:id/newGrocerie", (req, res) => {
   const { id } = req.params;
-  const { title, grocerie_id } = req.body;
-  console.log(title, grocerie_id);
+  const { title } = req.body;
   db("groceries")
+    .returning("*")
     .insert({
       // id: grocerie_id,
       title: title,
       user_id: id,
     })
-    .then((user) => res.json(user))
-    .catch((err) => res.json("grocerie is not in valid format"));
+    .then((grocerie) => res.json(grocerie))
+    .catch((err) => res.json(err));
 });
 
 //edit grocerie
