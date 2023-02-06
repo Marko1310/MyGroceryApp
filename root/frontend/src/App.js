@@ -46,7 +46,7 @@ function App() {
         method: "put",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          grocerie: { title: input, id: id },
+          grocerie: { title: input, grocerie_id: id },
         }),
       })
         .then((response) => response.json())

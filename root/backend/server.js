@@ -26,7 +26,15 @@ const database = {
 };
 
 app.get("/", (req, res) => {
-  res.send(database.users);
+  db.select("*")
+    .from("users")
+    .then((user) => {
+      if (user.length) {
+        res.json(user);
+      } else {
+        res.status(400).json("users not found");
+      }
+    });
 });
 
 app.listen(PORT, () => {
@@ -90,11 +98,13 @@ app.get("/profile/:id", (req, res) => {
 //add new grocerie
 app.put("/profile/:id/newGrocerie", (req, res) => {
   const { id } = req.params;
-  const { grocerie } = req.body;
-  db("users")
-    .where("id", "=", id)
-    .update({
-      groceries: db.raw("array_append(groceries, ?)", [grocerie]),
+  const { title, grocerie_id } = req.body;
+  console.log(title, grocerie_id);
+  db("groceries")
+    .insert({
+      // id: grocerie_id,
+      title: title,
+      user_id: id,
     })
     .then((user) => res.json(user))
     .catch((err) => res.json("grocerie is not in valid format"));
