@@ -70,14 +70,13 @@ app.post("/register", (req, res) => {
   db("users")
     .returning("*")
     .insert({
-      name: name,
       email: email,
-      joined: new Date(),
+      hash: password,
     })
     .then((user) => {
       res.json(user[0]);
     })
-    .catch((err) => res.status(400).json("unable to register"));
+    .catch((err) => res.status(400).json(err));
 });
 
 // get specific user
