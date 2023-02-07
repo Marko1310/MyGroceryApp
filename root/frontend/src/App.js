@@ -55,10 +55,12 @@ function App() {
           title: input,
         }),
       })
-        .then((response) => response.json())
-        .then((data) => {
-          setGroceries((prevGroceries) => [...prevGroceries, data]);
-        });
+        .then((response) => {
+          if (response) {
+            updateGroceires();
+          }
+        })
+        .catch((err) => console.log(err));
     } else {
       setShowAlert(true);
     }

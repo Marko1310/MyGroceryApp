@@ -105,12 +105,12 @@ app.put("/profile/:id/newGrocerie", (req, res) => {
   const { id } = req.params;
   const { title } = req.body;
   pool
-    .query(
-      "INSERT INTO groceries (title, user_id) VALUES ($1, $2) RETURNING *",
-      [title, id]
-    )
+    .query("INSERT INTO groceries (title, user_id) VALUES ($1, $2)", [
+      title,
+      id,
+    ])
     .then((grocerie) => {
-      res.status(200).json(grocerie.rows[0]);
+      res.status(200).json();
     })
     .catch((err) => res.json(err));
 });
