@@ -72,8 +72,12 @@ function App() {
     fetch(`http://localhost:3001/profile/${user.id}/clearList`, {
       method: "delete",
     })
-      .then((response) => response.json())
-      .then((data) => setGroceries(data));
+      .then((response) => {
+        if (response) {
+          updateGroceires();
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   // function to delete item

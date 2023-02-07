@@ -145,7 +145,7 @@ app.delete("/profile/:id/delete", (req, res) => {
 
   pool
     .query('DELETE FROM "groceries" WHERE "id" = $1;', [grocerie_id])
-    .then((grocerie) => {
+    .then(() => {
       res.status(200).json();
     })
     .catch((err) => console.log(err));
@@ -157,15 +157,20 @@ app.delete("/profile/:id/delete", (req, res) => {
 app.delete("/profile/:id/clearList", (req, res) => {
   const { id } = req.params;
 
-  let found = false;
-  database.users.forEach((user) => {
-    if (id === user.id) {
-      found = true;
-      user.groceries = [];
-      res.status(200).json(user.groceries);
-    }
-  });
-  if (!found) {
-    res.status(404).json("no such user");
-  }
+  // let found = false;
+  pool
+    .query("DELETE FROM groceries WHERE user_id = $1", [id])
+    .then(() => res.status(200).json())
+    .catch((err) => console.log(err));
+
+  // database.users.forEach((user) => {
+  //   if (id === user.id) {
+  //     found = true;
+  //     user.groceries = [];
+  //     res.status(200).json(user.groceries);
+  //   }
+  // });
+  // if (!found) {
+  //   res.status(404).json("no such user");
+  // }
 });
