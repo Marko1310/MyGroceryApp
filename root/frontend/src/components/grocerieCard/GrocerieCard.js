@@ -41,7 +41,8 @@ const GrocerieCard = ({
       .then((data) => {
         console.log(data);
         deleteGrocerie(data);
-      });
+      })
+      .catch((err) => console.log(err));
   };
 
   return (

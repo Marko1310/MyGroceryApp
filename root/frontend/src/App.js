@@ -26,7 +26,6 @@ function App() {
 
   // state for grocerie list
   const [groceries, setGroceries] = useState([]);
-  console.log(groceries);
 
   //state for showing the alert
   const [showAlert, setShowAlert] = useState(null);
