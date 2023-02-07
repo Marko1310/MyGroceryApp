@@ -2,17 +2,26 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const knex = require("knex");
+const { Pool } = require("pg");
 
-const db = knex({
-  client: "pg",
-  connection: {
-    host: "127.0.0.1",
-    port: 5432,
-    user: "marko",
-    password: "",
-    database: "grocerie",
-  },
+const pool = new Pool({
+  host: "127.0.0.1",
+  port: 5432,
+  user: "marko",
+  password: "",
+  database: "grocerie",
 });
+
+// const db = knex({
+//   client: "pg",
+//   connection: {
+//     host: "127.0.0.1",
+//     port: 5432,
+//     user: "marko",
+//     password: "",
+//     database: "grocerie",
+//   },
+// });
 
 const PORT = 3001;
 
@@ -26,15 +35,13 @@ const database = {
 };
 
 app.get("/", (req, res) => {
-  db.select("*")
-    .from("users")
-    .then((user) => {
-      if (user.length) {
-        res.json(user);
-      } else {
-        res.status(400).json("users not found");
-      }
-    });
+  pool.query("SELECT * FROM users").then((user) => {
+    if (user.length) {
+      res.json(user);
+    } else {
+      res.status(400).json("users not found");
+    }
+  });
 });
 
 app.listen(PORT, () => {
@@ -67,14 +74,13 @@ app.post("/register", (req, res) => {
   //   joined: new Date(),
   // });
 
-  db("users")
-    .returning("*")
-    .insert({
-      email: email,
-      hash: password,
-    })
+  pool
+    .query("INSERT INTO users (email, hash) VALUES ($1, $2) RETURNING *", [
+      email,
+      password,
+    ])
     .then((user) => {
-      res.json(user[0]);
+      res.json(user.rows[0]);
     })
     .catch((err) => res.status(400).json(err));
 });
@@ -98,16 +104,13 @@ app.get("/profile/:id", (req, res) => {
 app.put("/profile/:id/newGrocerie", (req, res) => {
   const { id } = req.params;
   const { title } = req.body;
-  db("groceries")
-    .returning("*")
-    .insert({
-      // id: grocerie_id,
-      title: title,
-      user_id: id,
-    })
+  pool
+    .query(
+      "INSERT INTO groceries (title, user_id) VALUES ($1, $2) RETURNING *",
+      [title, id]
+    )
     .then((grocerie) => {
-      console.log(grocerie[0]);
-      res.status(200).json(grocerie[0]);
+      res.status(200).json(grocerie.rows[0]);
     })
     .catch((err) => res.json(err));
 });
@@ -140,16 +143,19 @@ app.delete("/profile/:id/delete", (req, res) => {
   const { grocerie_id } = req.body;
 
   let found = false;
-  database.users.forEach((user) => {
-    if (id === user.id) {
-      found = true;
-      const [grocerieToDelete] = user.groceries.filter((el) => {
-        return el.id == grocerie_id;
-      });
-      user.groceries.splice(user.groceries.indexOf(grocerieToDelete), 1);
-      res.status(200).json(user.groceries);
-    }
-  });
+
+  // db.select("groceries").returning("*").
+
+  // database.users.forEach((user) => {
+  //   if (id === user.id) {
+  //     found = true;
+  //     const [grocerieToDelete] = user.groceries.filter((el) => {
+  //       return el.id == grocerie_id;
+  //     });
+  //     user.groceries.splice(user.groceries.indexOf(grocerieToDelete), 1);
+  //     res.status(200).json(user.groceries);
+  //   }
+  // });
   if (!found) {
     res.status(404).json("no such user");
   }
