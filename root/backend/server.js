@@ -36,7 +36,6 @@ const database = {
 
 app.get("/profile/:id", (req, res) => {
   const { id } = req.params;
-  console.log(id);
   pool
     .query("SELECT * FROM groceries WHERE user_id = $1", [id])
     .then((groceries) => {

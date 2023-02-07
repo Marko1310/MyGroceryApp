@@ -36,6 +36,13 @@ function App() {
     setInput(e.target.value);
   };
 
+  // function to update groceries state after every query
+  const updateGroceires = function () {
+    fetch(`http://localhost:3001/profile/${user.id}`)
+      .then((res) => res.json())
+      .then((data) => setGroceries(data));
+  };
+
   // function to add groceries
   const addGrocerie = function () {
     // const id = Math.random();
@@ -69,10 +76,8 @@ function App() {
   };
 
   // function to delete item
-  const deleteGrocerie = function (data) {
-    console.log(data);
-    setGroceries(data);
-    console.log(groceries);
+  const deleteGrocerie = function () {
+    updateGroceires();
   };
 
   // function to edit grocerie list
