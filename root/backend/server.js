@@ -34,14 +34,15 @@ const database = {
   users: [],
 };
 
-app.get("/", (req, res) => {
-  pool.query("SELECT * FROM users").then((user) => {
-    if (user.length) {
-      res.json(user);
-    } else {
-      res.status(400).json("users not found");
-    }
-  });
+app.get("/profile/:id", (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+  pool
+    .query("SELECT  * FROM groceries;")
+    .then((groceries) => {
+      res.json(groceries.rows);
+    })
+    .catch((err) => res.status(400).json(err));
 });
 
 app.listen(PORT, () => {
@@ -85,20 +86,20 @@ app.post("/register", (req, res) => {
     .catch((err) => res.status(400).json(err));
 });
 
-// get specific user
-app.get("/profile/:id", (req, res) => {
-  const { id } = req.params;
-  db.select("*")
-    .from("users")
-    .where("id", id)
-    .then((user) => {
-      if (user.length) {
-        res.json(user[0]);
-      } else {
-        res.status(400).json("user not found");
-      }
-    });
-});
+// // get specific user
+// app.get("/profile/:id", (req, res) => {
+//   const { id } = req.params;
+//   db.select("*")
+//     .from("users")
+//     .where("id", id)
+//     .then((user) => {
+//       if (user.length) {
+//         res.json(user[0]);
+//       } else {
+//         res.status(400).json("user not found");
+//       }
+//     });
+// });
 
 //add new grocerie
 app.put("/profile/:id/newGrocerie", (req, res) => {
