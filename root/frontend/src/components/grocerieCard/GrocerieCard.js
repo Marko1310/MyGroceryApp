@@ -8,7 +8,6 @@ const GrocerieCard = ({
   deleteGrocerie,
 }) => {
   const [content, setContent] = useState(eachGrocerie.title);
-  const id = eachGrocerie.id;
   const [edit, setEdit] = useState(false);
   const input = useRef(null);
 
@@ -22,7 +21,7 @@ const GrocerieCard = ({
       fetch(`http://localhost:3001/profile/${user.id}/editgrocerie`, {
         method: "put",
         headers: { "Content-type": "application/json" },
-        body: JSON.stringify({ title: content, grocerie_id: id }),
+        body: JSON.stringify({ title: content, grocerie_id: eachGrocerie.id }),
       })
         .then((response) => response.json())
         .then((data) => {
@@ -35,12 +34,10 @@ const GrocerieCard = ({
     fetch(`http://localhost:3001/profile/${user.id}/delete`, {
       method: "delete",
       headers: { "Content-type": "application/json" },
-      body: JSON.stringify({ grocerie_id: id }),
+      body: JSON.stringify({ grocerie_id: eachGrocerie.id }),
     })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        deleteGrocerie(data);
+      .then((response) => {
+        if (response) deleteGrocerie();
       })
       .catch((err) => console.log(err));
   };

@@ -139,18 +139,14 @@ app.put("/profile/:id/editgrocerie", (req, res) => {
 
 //delete specific grocerie
 app.delete("/profile/:id/delete", (req, res) => {
-  const { id } = req.params;
   const { grocerie_id } = req.body;
 
   // let found = false;
 
   pool
-    .query('DELETE FROM "groceries" WHERE "id" = $1 RETURNING *;', [
-      grocerie_id,
-    ])
+    .query('DELETE FROM "groceries" WHERE "id" = $1;', [grocerie_id])
     .then((grocerie) => {
-      console.log(grocerie.rows[0]);
-      res.status(200).json(grocerie.rows[0]);
+      res.status(200).json();
     })
     .catch((err) => console.log(err));
   // if (!found) {
