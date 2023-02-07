@@ -26,6 +26,7 @@ function App() {
 
   // state for grocerie list
   const [groceries, setGroceries] = useState([]);
+  console.log(groceries);
 
   //state for showing the alert
   const [showAlert, setShowAlert] = useState(null);
@@ -71,6 +72,7 @@ function App() {
   const deleteGrocerie = function (data) {
     console.log(data);
     setGroceries(data);
+    console.log(groceries);
   };
 
   // function to edit grocerie list

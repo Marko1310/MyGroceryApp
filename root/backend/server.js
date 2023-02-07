@@ -142,23 +142,20 @@ app.delete("/profile/:id/delete", (req, res) => {
   const { id } = req.params;
   const { grocerie_id } = req.body;
 
-  let found = false;
+  // let found = false;
 
-  // db.select("groceries").returning("*").
-
-  // database.users.forEach((user) => {
-  //   if (id === user.id) {
-  //     found = true;
-  //     const [grocerieToDelete] = user.groceries.filter((el) => {
-  //       return el.id == grocerie_id;
-  //     });
-  //     user.groceries.splice(user.groceries.indexOf(grocerieToDelete), 1);
-  //     res.status(200).json(user.groceries);
-  //   }
-  // });
-  if (!found) {
-    res.status(404).json("no such user");
-  }
+  pool
+    .query('DELETE FROM "groceries" WHERE "id" = $1 RETURNING *;', [
+      grocerie_id,
+    ])
+    .then((grocerie) => {
+      console.log(grocerie.rows[0]);
+      res.status(200).json(grocerie.rows[0]);
+    })
+    .catch((err) => console.log(err));
+  // if (!found) {
+  //   res.status(404).json("no such user");
+  // }
 });
 
 app.delete("/profile/:id/clearList", (req, res) => {
