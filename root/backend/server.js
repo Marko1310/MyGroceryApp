@@ -34,6 +34,11 @@ const database = {
   users: [],
 };
 
+app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`);
+});
+
+// route to get all groceries from user
 app.get("/profile/:id", (req, res) => {
   const { id } = req.params;
   pool
@@ -42,10 +47,6 @@ app.get("/profile/:id", (req, res) => {
       res.json(groceries.rows);
     })
     .catch((err) => res.status(400).json(err));
-});
-
-app.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`);
 });
 
 // signin route
@@ -85,22 +86,7 @@ app.post("/register", (req, res) => {
     .catch((err) => res.status(400).json(err));
 });
 
-// // get specific user
-// app.get("/profile/:id", (req, res) => {
-//   const { id } = req.params;
-//   db.select("*")
-//     .from("users")
-//     .where("id", id)
-//     .then((user) => {
-//       if (user.length) {
-//         res.json(user[0]);
-//       } else {
-//         res.status(400).json("user not found");
-//       }
-//     });
-// });
-
-//add new grocerie
+//route to add new grocerie
 app.put("/profile/:id/newGrocerie", (req, res) => {
   const { id } = req.params;
   const { title } = req.body;
@@ -109,35 +95,30 @@ app.put("/profile/:id/newGrocerie", (req, res) => {
       title,
       id,
     ])
-    .then((grocerie) => {
+    .then(() => {
       res.status(200).json();
     })
     .catch((err) => res.json(err));
 });
 
-//edit grocerie
+//route to edit grocerie
 app.put("/profile/:id/editgrocerie", (req, res) => {
   const { id } = req.params;
-  console.log(req);
   const { title, grocerie_id } = req.body;
-  let found = false;
-  database.users.forEach((user) => {
-    if (id === user.id) {
-      found = true;
-      user.groceries.forEach((grocerie) => {
-        if (grocerie_id === grocerie.id) {
-          grocerie.title = title;
-        }
-      });
-      res.status(200).json(user.groceries);
-    }
-  });
-  if (!found) {
-    res.status(404).json("no such user");
-  }
+  // let found = false;
+  pool
+    .query('UPDATE "groceries" SET "title" = $1 WHERE "id" = $2', [
+      title,
+      grocerie_id,
+    ])
+    .then(() => res.json())
+    .catch((err) => console.log(err));
+  // if (!found) {
+  //   res.status(404).json("no such user");
+  // }
 });
 
-//delete specific grocerie
+//route to delete specific grocerie
 app.delete("/profile/:id/delete", (req, res) => {
   const { grocerie_id } = req.body;
 
@@ -154,6 +135,7 @@ app.delete("/profile/:id/delete", (req, res) => {
   // }
 });
 
+//route to clear the list
 app.delete("/profile/:id/clearList", (req, res) => {
   const { id } = req.params;
 
@@ -163,13 +145,6 @@ app.delete("/profile/:id/clearList", (req, res) => {
     .then(() => res.status(200).json())
     .catch((err) => console.log(err));
 
-  // database.users.forEach((user) => {
-  //   if (id === user.id) {
-  //     found = true;
-  //     user.groceries = [];
-  //     res.status(200).json(user.groceries);
-  //   }
-  // });
   // if (!found) {
   //   res.status(404).json("no such user");
   // }

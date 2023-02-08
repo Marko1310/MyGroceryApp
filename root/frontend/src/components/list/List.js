@@ -8,6 +8,7 @@ const List = ({
   deleteGrocerie,
   emptyList,
   editGrocerieList,
+  updateGroceires,
 }) => {
   return (
     <div className="grocery-list-container">
@@ -19,6 +20,7 @@ const List = ({
             deleteGrocerie={deleteGrocerie}
             user={user}
             editGrocerieList={editGrocerieList}
+            updateGroceires={updateGroceires}
           />
         );
       })}

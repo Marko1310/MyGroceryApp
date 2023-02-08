@@ -39,7 +39,10 @@ function App() {
   const updateGroceires = function () {
     fetch(`http://localhost:3001/profile/${user.id}`)
       .then((res) => res.json())
-      .then((data) => setGroceries(data));
+      .then((data) => {
+        console.log(data);
+        setGroceries(data);
+      });
   };
 
   // function to add groceries
@@ -159,6 +162,7 @@ function App() {
               editGrocerieList={editGrocerieList}
               input={input}
               changeInput={changeInput}
+              updateGroceires={updateGroceires}
             />
           </div>
         </div>

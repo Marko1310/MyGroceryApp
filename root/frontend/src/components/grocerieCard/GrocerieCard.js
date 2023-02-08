@@ -6,6 +6,7 @@ const GrocerieCard = ({
   user,
   editGrocerieList,
   deleteGrocerie,
+  updateGroceires,
 }) => {
   const [content, setContent] = useState(eachGrocerie.title);
   const [edit, setEdit] = useState(false);
@@ -22,11 +23,11 @@ const GrocerieCard = ({
         method: "put",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({ title: content, grocerie_id: eachGrocerie.id }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          editGrocerieList(data);
-        });
+      }).then((response) => {
+        if (response) {
+          updateGroceires();
+        }
+      });
     }
   };
 
