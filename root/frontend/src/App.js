@@ -56,6 +56,7 @@ function App() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           title: input,
+          date: new Date(),
         }),
       })
         .then((response) => {
