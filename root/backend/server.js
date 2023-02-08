@@ -4,6 +4,8 @@ const cors = require("cors");
 const { Pool } = require("pg");
 const bcrypt = require("bcryptjs");
 
+const register = require("./controllers/register");
+
 const pool = new Pool({
   host: "127.0.0.1",
   port: 5432,
@@ -19,28 +21,13 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded());
 
-const database = {
-  users: [],
-};
-
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
 
 //register route
 app.post("/register", (req, res) => {
-  const { name, email, password } = req.body;
-  const hash = bcrypt.hashSync(password);
-
-  pool
-    .query(
-      "INSERT INTO users (email, hash, name) VALUES ($1, $2, $3) RETURNING *",
-      [email, hash, name]
-    )
-    .then((user) => {
-      res.json(user.rows[0]);
-    })
-    .catch((err) => res.status(400).json(err));
+  register.handleRegister(req, res, pool, bcrypt);
 });
 
 // signin route
