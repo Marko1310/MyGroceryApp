@@ -1,8 +1,8 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const knex = require("knex");
 const { Pool } = require("pg");
+const bcrypt = require("bcryptjs");
 
 const pool = new Pool({
   host: "127.0.0.1",
@@ -27,6 +27,22 @@ app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
 
+//register route
+app.post("/register", (req, res) => {
+  const { name, email, password } = req.body;
+  const hash = bcrypt.hashSync(password);
+
+  pool
+    .query(
+      "INSERT INTO users (email, hash, name) VALUES ($1, $2, $3) RETURNING *",
+      [email, hash, name]
+    )
+    .then((user) => {
+      res.json(user.rows[0]);
+    })
+    .catch((err) => res.status(400).json(err));
+});
+
 // route to get all groceries from user
 app.get("/profile/:id", (req, res) => {
   const { id } = req.params;
@@ -46,33 +62,6 @@ app.post("/signin", (req, res) => {
   ) {
     res.json("success");
   } else res.status(400).json("error login in");
-});
-
-//register route
-app.post("/register", (req, res) => {
-  // const id =
-  //   database.users.length > 0
-  //     ? database.users[database.users.length - 1].id * 1 + 1
-  //     : 1;
-  const { name, email, password } = req.body;
-  // database.users.push({
-  //   id: JSON.stringify(id),
-  //   name: name,
-  //   email: email,
-  //   password: password,
-  //   groceries: [],
-  //   joined: new Date(),
-  // });
-
-  pool
-    .query(
-      "INSERT INTO users (email, hash, name) VALUES ($1, $2, $3) RETURNING *",
-      [email, password, name]
-    )
-    .then((user) => {
-      res.json(user.rows[0]);
-    })
-    .catch((err) => res.status(400).json(err));
 });
 
 //route to add new grocerie
