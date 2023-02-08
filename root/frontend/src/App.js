@@ -126,7 +126,6 @@ function App() {
       id: data.id,
       name: data.name,
       email: data.email,
-      groceries: data.groceries,
       joined: new Date(),
     });
   };
@@ -141,7 +140,11 @@ function App() {
         />
       )}
       {route === "login" && !logged && (
-        <Login switchRoute={switchRoute} changeLogged={changeLogged} />
+        <Login
+          switchRoute={switchRoute}
+          changeLogged={changeLogged}
+          updateUser={updateUser}
+        />
       )}
       {logged && (
         <div>

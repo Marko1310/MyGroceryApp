@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Login.css";
 
-function Login({ changeLogged, switchRoute }) {
+function Login({ changeLogged, updateUser, switchRoute }) {
   // state for input field
   const [input, setInput] = useState({
     email: "",
@@ -32,8 +32,9 @@ function Login({ changeLogged, switchRoute }) {
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data === "success") {
+        if (data) {
           changeLogged();
+          updateUser(data);
         }
       });
   };
