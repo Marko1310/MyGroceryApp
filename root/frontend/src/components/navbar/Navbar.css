@@ -27,10 +27,28 @@
 }
 
 .navbar-signout {
-  margin-right: 1rem;
+  margin-right: 0.5rem;
   text-decoration: underline;
 }
 
 .navbar-signout:hover {
   cursor: pointer;
+}
+
+.navbar-name {
+  color: black;
+  margin: 0;
+  font-size: larger;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.navbar-right {
+  display: flex;
+  flex-direction: row;
+  /* width: 30%; */
+  margin-right: 0;
+  gap: 1rem;
+  align-items: center;
 }

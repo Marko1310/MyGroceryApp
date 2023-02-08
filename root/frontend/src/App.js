@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import List from "./components/list/List";
 import Alert from "./components/alert/Alert";
 import Navbar from "./components/navbar/Navbar";
@@ -145,7 +145,7 @@ function App() {
       )}
       {logged && (
         <div>
-          <Navbar signout={signout} />
+          <Navbar signout={signout} user={user} />
           <div className="main-container">
             <div className="alert-container">
               {showAlert && <Alert removeALert={removeALert} />}
