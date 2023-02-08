@@ -32,7 +32,7 @@ function Login({ changeLogged, updateUser, switchRoute }) {
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data) {
+        if (data.id) {
           changeLogged();
           updateUser(data);
         }
