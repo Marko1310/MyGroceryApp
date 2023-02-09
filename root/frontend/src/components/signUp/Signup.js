@@ -21,12 +21,17 @@ function Signup({ changeLogged, switchRoute, updateUser }) {
       }),
     })
       .then((response) => response.json())
-      .then((user) => {
-        if (user.id) {
-          updateUser(user);
-          changeLogged();
+      .then((data) => {
+        if (data === "name cannot be empty") {
+          console.log("name cannot be empty");
         }
       })
+      // .then((user) => {
+      //   if (user.id) {
+      //     updateUser(user);
+      //     changeLogged();
+      //   }
+      // })
       .catch((err) => console.log(err));
   };
 
