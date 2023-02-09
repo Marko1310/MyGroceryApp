@@ -1,5 +1,4 @@
 const handleSignin = (req, res, pool, bcrypt) => {
-  console.log("aaaa");
   const { email, password } = req.body;
   pool
     .query("SELECT * FROM users WHERE email = $1", [email])
