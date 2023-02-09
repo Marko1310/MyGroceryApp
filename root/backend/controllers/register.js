@@ -2,7 +2,7 @@ const handleRegister = (req, res, pool, bcrypt) => {
   const { name, email, password } = req.body;
   const hash = bcrypt.hashSync(password);
 
-  if (name !== "") {
+  if (name && email && password) {
     pool
       .query(
         "INSERT INTO users (email, hash, name) VALUES ($1, $2, $3) RETURNING *",
