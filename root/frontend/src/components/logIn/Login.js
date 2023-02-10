@@ -22,7 +22,7 @@ function Login({ changeLogged, updateUser, switchRoute }) {
 
   const login = function (event) {
     event.preventDefault();
-    fetch("http://localhost:3001/signin", {
+    fetch("http://localhost:3001/login", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -61,7 +61,7 @@ function Login({ changeLogged, updateUser, switchRoute }) {
           placeholder="Password"
         ></input>
 
-        <button className="signin-button">Login</button>
+        <button className="login-button">Login</button>
         <div className="login-footer">
           <p>Not a member? </p>
           <a onClick={switchRoute} className="sign-up">

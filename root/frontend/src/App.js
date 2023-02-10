@@ -10,7 +10,7 @@ function App() {
   // state for logged in
   const [logged, setLogged] = useState(false);
 
-  // state for login or sign up
+  // state for login or register
   const [route, setRoute] = useState("register");
 
   // state for input field

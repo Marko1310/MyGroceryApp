@@ -5,7 +5,7 @@ const { Pool } = require("pg");
 const bcrypt = require("bcryptjs");
 
 const register = require("./controllers/register");
-const signin = require("./controllers/signin");
+const login = require("./controllers/login");
 
 const pool = new Pool({
   host: "127.0.0.1",
@@ -31,9 +31,9 @@ app.post("/register", (req, res) => {
   register.handleRegister(req, res, pool, bcrypt);
 });
 
-// signin route
-app.post("/signin", (req, res) => {
-  signin.handleSignin(req, res, pool, bcrypt);
+// login route
+app.post("/login", (req, res) => {
+  login.handleLogin(req, res, pool, bcrypt);
 });
 
 // route to get all groceries from user

@@ -1,4 +1,4 @@
-const handleSignin = (req, res, pool, bcrypt) => {
+const handleLogin = (req, res, pool, bcrypt) => {
   const { email, password } = req.body;
   pool
     .query("SELECT * FROM users WHERE email = $1", [email])
@@ -19,5 +19,5 @@ const handleSignin = (req, res, pool, bcrypt) => {
 };
 
 module.exports = {
-  handleSignin: handleSignin,
+  handleLogin: handleLogin,
 };
