@@ -52,14 +52,21 @@ app.put("/profile/:id/newGrocerie", (req, res) =>
 app.put("/profile/:id/editgrocerie", (req, res) => {
   const { id } = req.params;
   const { title, grocerie_id } = req.body;
-  // let found = false;
-  pool
-    .query('UPDATE "groceries" SET "title" = $1 WHERE "id" = $2', [
-      title,
-      grocerie_id,
-    ])
-    .then(() => res.json())
-    .catch((err) => console.log(err));
+  let found = false;
+
+  if (title.length > 0) {
+    pool
+      .query('UPDATE "groceries" SET "title" = $1 WHERE "id" = $2', [
+        title,
+        grocerie_id,
+      ])
+      .then(() => res.json())
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
+  } else {
+    res.status(400).json("please enter a valid grocerie");
+  }
+
   // if (!found) {
   //   res.status(404).json("no such user");
   // }
