@@ -4,14 +4,14 @@ import Alert from "./components/alert/Alert";
 import Navbar from "./components/navbar/Navbar";
 import Submit from "./components/submit/Submit";
 import Login from "./components/logIn/Login";
-import Register from "./components/signUp/Register";
+import Register from "./components/register/Register";
 
 function App() {
   // state for logged in
   const [logged, setLogged] = useState(false);
 
   // state for login or sign up
-  const [route, setRoute] = useState("signup");
+  const [route, setRoute] = useState("register");
 
   // state for input field
   const [input, setInput] = useState("");
@@ -104,12 +104,12 @@ function App() {
     setLogged(true);
   };
 
-  // function to switch between login and signup
+  // function to switch between login and register
   const switchRoute = function () {
-    if (route === "signup") {
+    if (route === "register") {
       setRoute("login");
     } else if (route === "login") {
-      setRoute("signup");
+      setRoute("register");
     }
   };
 
@@ -132,7 +132,7 @@ function App() {
 
   return (
     <div>
-      {route === "signup" && !logged && (
+      {route === "register" && !logged && (
         <Register
           changeLogged={changeLogged}
           switchRoute={switchRoute}
