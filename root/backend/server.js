@@ -8,6 +8,7 @@ const register = require("./controllers/register");
 const login = require("./controllers/login");
 const getGroceries = require("./controllers/getGroceries");
 const newGrocerie = require("./controllers/newGrocerie");
+const editGrocerie = require("./controllers/editGrocerie");
 
 const pool = new Pool({
   host: "127.0.0.1",
@@ -49,28 +50,9 @@ app.put("/profile/:id/newGrocerie", (req, res) =>
 );
 
 //route to edit grocerie
-app.put("/profile/:id/editgrocerie", (req, res) => {
-  const { id } = req.params;
-  const { title, grocerie_id } = req.body;
-  let found = false;
-
-  if (title.length > 0) {
-    pool
-      .query('UPDATE "groceries" SET "title" = $1 WHERE "id" = $2', [
-        title,
-        grocerie_id,
-      ])
-      .then(() => res.json())
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err));
-  } else {
-    res.status(400).json("please enter a valid grocerie");
-  }
-
-  // if (!found) {
-  //   res.status(404).json("no such user");
-  // }
-});
+app.put("/profile/:id/editgrocerie", (req, res) =>
+  editGrocerie.handleEditGrocerie(req, res, pool)
+);
 
 //route to delete specific grocerie
 app.delete("/profile/:id/delete", (req, res) => {
