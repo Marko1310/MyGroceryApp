@@ -20,6 +20,28 @@ function Login({ changeLogged, updateUser, switchRoute }) {
     });
   };
 
+  //state for alerts
+  const [alert, setAlert] = useState({
+    email: false,
+    password: false,
+  });
+
+  const changeAlert = function (type) {
+    if (type === "email") {
+      setAlert((prevAlert) => ({
+        ...prevAlert,
+        email: true,
+        password: false,
+      }));
+    } else if (type === "password") {
+      setAlert((prevAlert) => ({
+        ...prevAlert,
+        email: false,
+        password: true,
+      }));
+    }
+  };
+
   const login = function (event) {
     event.preventDefault();
     fetch("http://localhost:3001/login", {
@@ -35,6 +57,11 @@ function Login({ changeLogged, updateUser, switchRoute }) {
         if (data.id) {
           changeLogged();
           updateUser(data);
+        }
+        if (data === "wrong credentials") {
+          changeAlert("email");
+        } else if (data === "wrong password") {
+          changeAlert("password");
         }
       });
   };
@@ -52,6 +79,7 @@ function Login({ changeLogged, updateUser, switchRoute }) {
           name="fname"
           placeholder="Email"
         ></input>
+        {alert.email && <p className="register-alert">Wrong credentials</p>}
 
         <label htmlFor="password"></label>
         <input
@@ -60,6 +88,7 @@ function Login({ changeLogged, updateUser, switchRoute }) {
           type="text"
           placeholder="Password"
         ></input>
+        {alert.password && <p className="register-alert">Wrong password</p>}
 
         <button className="login-button">Login</button>
         <div className="login-footer">

@@ -10,12 +10,12 @@ const handleLogin = (req, res, pool, bcrypt) => {
           .then((user) => {
             res.json(user.rows[0]);
           })
-          .catch((err) => res.status(400).json("unable to get user"));
+          .catch(() => res.status(400).json("unable to get user"));
       } else {
-        res.status(400).json("wrong credentials");
+        res.status(400).json("wrong password");
       }
     })
-    .catch((err) => res.status(400).json("wrong credentials"));
+    .catch(() => res.status(400).json("wrong credentials"));
 };
 
 module.exports = {
