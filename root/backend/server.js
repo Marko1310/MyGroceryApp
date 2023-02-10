@@ -6,6 +6,8 @@ const bcrypt = require("bcryptjs");
 
 const register = require("./controllers/register");
 const login = require("./controllers/login");
+const getGroceries = require("./controllers/getGroceries");
+const newGrocerie = require("./controllers/newGrocerie");
 
 const pool = new Pool({
   host: "127.0.0.1",
@@ -37,31 +39,14 @@ app.post("/login", (req, res) => {
 });
 
 // route to get all groceries from user
-app.get("/profile/:id", (req, res) => {
-  const { id } = req.params;
-  pool
-    .query("SELECT * FROM groceries WHERE user_id = $1 ORDER BY date", [id])
-    .then((groceries) => {
-      res.json(groceries.rows);
-    })
-    .catch((err) => res.status(400).json(err));
-});
+app.get("/profile/:id", (req, res) =>
+  getGroceries.handleGetGroceries(req, res, pool)
+);
 
 //route to add new grocerie
-app.put("/profile/:id/newGrocerie", (req, res) => {
-  const { id } = req.params;
-  const { title, date } = req.body;
-  pool
-    .query("INSERT INTO groceries (title, user_id, date) VALUES ($1, $2, $3)", [
-      title,
-      id,
-      date,
-    ])
-    .then(() => {
-      res.status(200).json();
-    })
-    .catch((err) => res.json(err));
-});
+app.put("/profile/:id/newGrocerie", (req, res) =>
+  newGrocerie.handleNewGrocerie(req, res, pool)
+);
 
 //route to edit grocerie
 app.put("/profile/:id/editgrocerie", (req, res) => {
