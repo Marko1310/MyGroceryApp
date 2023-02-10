@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "./Signup.css";
+import "./Register.css";
 
-function Signup({ changeLogged, switchRoute, updateUser }) {
+function Register({ changeLogged, switchRoute, updateUser }) {
   // state for input field
   const [input, setInput] = useState({
     name: "",
@@ -9,7 +9,14 @@ function Signup({ changeLogged, switchRoute, updateUser }) {
     password: "",
   });
 
-  const signUp = function (event) {
+  //state for alerts
+  const [alert, setAlert] = useState({
+    name: false,
+    email: false,
+    password: false,
+  });
+
+  const register = function (event) {
     event.preventDefault();
     fetch("http://localhost:3001/register", {
       method: "post",
@@ -22,16 +29,17 @@ function Signup({ changeLogged, switchRoute, updateUser }) {
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data === "name cannot be empty") {
-          console.log("name cannot be empty");
+        if (data.id) {
+          updateUser(data);
+          changeLogged();
+        } else if (data === "name can not be empty") {
+          changeAlert("name");
+        } else if (data === "not a proper email") {
+          changeAlert("email");
+        } else if (data === "password has to be at least 6 characters long") {
+          changeAlert("password");
         }
       })
-      // .then((user) => {
-      //   if (user.id) {
-      //     updateUser(user);
-      //     changeLogged();
-      //   }
-      // })
       .catch((err) => console.log(err));
   };
 
@@ -53,9 +61,34 @@ function Signup({ changeLogged, switchRoute, updateUser }) {
     });
   };
 
+  const changeAlert = function (type) {
+    if (type === "name") {
+      setAlert((prevAlert) => ({
+        ...prevAlert,
+        name: true,
+        email: false,
+        password: false,
+      }));
+    } else if (type === "email") {
+      setAlert((prevAlert) => ({
+        ...prevAlert,
+        name: false,
+        email: true,
+        password: false,
+      }));
+    } else if (type === "password") {
+      setAlert((prevAlert) => ({
+        ...prevAlert,
+        name: false,
+        email: false,
+        password: true,
+      }));
+    }
+  };
+
   return (
-    <div className="signup-container">
-      <form onSubmit={signUp} className="form-validate">
+    <div className="register-container">
+      <form onSubmit={register} className="form-validate">
         <p className="title">SIGN UP</p>
         <label htmlFor="name"></label>
         <input
@@ -66,6 +99,9 @@ function Signup({ changeLogged, switchRoute, updateUser }) {
           name="name"
           placeholder="Name"
         ></input>
+        {alert.name && (
+          <p className="register-alert">Name field can not be empty</p>
+        )}
 
         <label htmlFor="email"></label>
         <input
@@ -76,6 +112,7 @@ function Signup({ changeLogged, switchRoute, updateUser }) {
           name="email"
           placeholder="Email"
         ></input>
+        {alert.email && <p className="register-alert">Not a proper email</p>}
 
         <label htmlFor="password"></label>
         <input
@@ -84,8 +121,13 @@ function Signup({ changeLogged, switchRoute, updateUser }) {
           type="text"
           placeholder="Password"
         ></input>
+        {alert.password && (
+          <p className="register-alert">
+            Password has to be at least 6 characters long
+          </p>
+        )}
 
-        <button className="signup-button">sign up</button>
+        <button className="register-button">sign up</button>
         <div className="login-footer">
           <p>Already a member? </p>
           <a onClick={switchRoute} className="login">
@@ -97,4 +139,4 @@ function Signup({ changeLogged, switchRoute, updateUser }) {
   );
 }
 
-export default Signup;
+export default Register;

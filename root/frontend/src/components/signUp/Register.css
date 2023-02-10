@@ -7,7 +7,7 @@ body {
   font-size: 0.875rem;
 }
 
-.signup-container {
+.register-container {
   left: 50%;
   top: 50%;
   position: absolute;
@@ -37,7 +37,7 @@ body {
 }
 
 .forms {
-  margin-bottom: 1rem;
+  margin-bottom: 0.2rem;
   display: flex;
   flex-direction: column;
   background-color: #e6e6e6;
@@ -56,7 +56,7 @@ body {
   opacity: 1;
 }
 
-.signup-button {
+.register-button {
   font-size: 1rem;
   color: #fff;
   text-transform: uppercase;
@@ -70,7 +70,7 @@ body {
   margin-top: 2rem;
 }
 
-.signup-button:hover {
+.register-button:hover {
   background-color: #838283;
 }
 
@@ -91,4 +91,10 @@ body {
 .login:hover {
   cursor: pointer;
   color: #d33f8d;
+}
+
+.register-alert {
+  color: rgb(225, 101, 101);
+  font-size: small;
+  margin-right: auto;
 }

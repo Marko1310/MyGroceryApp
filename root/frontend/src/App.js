@@ -4,7 +4,7 @@ import Alert from "./components/alert/Alert";
 import Navbar from "./components/navbar/Navbar";
 import Submit from "./components/submit/Submit";
 import Login from "./components/logIn/Login";
-import Signup from "./components/signUp/Signup";
+import Register from "./components/signUp/Register";
 
 function App() {
   // state for logged in
@@ -133,7 +133,7 @@ function App() {
   return (
     <div>
       {route === "signup" && !logged && (
-        <Signup
+        <Register
           changeLogged={changeLogged}
           switchRoute={switchRoute}
           updateUser={updateUser}
