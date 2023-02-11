@@ -4,7 +4,6 @@ import "./GrocerieCard.css";
 const GrocerieCard = ({
   eachGrocerie,
   user,
-  editGrocerieList,
   deleteGrocerie,
   updateGroceires,
 }) => {
@@ -23,11 +22,13 @@ const GrocerieCard = ({
         method: "put",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({ title: content, grocerie_id: eachGrocerie.id }),
-      }).then((response) => {
-        if (response) {
-          updateGroceires();
-        }
-      });
+      })
+        .then((response) => {
+          if (response) {
+            updateGroceires();
+          }
+        })
+        .catch((err) => console.log(err));
     }
   };
 
@@ -38,7 +39,7 @@ const GrocerieCard = ({
       body: JSON.stringify({ grocerie_id: eachGrocerie.id }),
     })
       .then((response) => {
-        if (response) deleteGrocerie();
+        if (response) updateGroceires();
       })
       .catch((err) => console.log(err));
   };

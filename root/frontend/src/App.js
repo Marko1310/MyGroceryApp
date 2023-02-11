@@ -27,14 +27,6 @@ function App() {
   // state for grocerie list
   const [groceries, setGroceries] = useState([]);
 
-  // //state for showing the alert
-  // const [showAlert, setShowAlert] = useState(null);
-
-  // function to update the input state field when entering the que
-  const changeInput = function (e) {
-    setInput(e.target.value);
-  };
-
   // function to update groceries state after every query to the database
   const updateGroceires = function () {
     fetch(`http://localhost:3001/profile/${user.id}`)
@@ -59,20 +51,10 @@ function App() {
     }
   };
 
-  // function to delete item
-  const deleteGrocerie = function () {
-    updateGroceires();
-  };
-
   // function to edit grocerie list
   const editGrocerieList = function (data) {
     setGroceries(data);
   };
-
-  // // function to remove alert
-  // const removeALert = function () {
-  //   setShowAlert(false);
-  // };
 
   // function to change logged status
   const changeLogged = function () {
@@ -131,18 +113,13 @@ function App() {
         <div>
           <Navbar signout={signout} user={user} />
           <div className="main-container">
-            {/* <div className="alert-container">
-              {showAlert && <Alert removeALert={removeALert} />}
-            </div> */}
             <Submit updateGroceires={updateGroceires} user={user} />
             <List
               user={user}
               groceries={groceries}
-              deleteGrocerie={deleteGrocerie}
               emptyList={emptyList}
               editGrocerieList={editGrocerieList}
               input={input}
-              changeInput={changeInput}
               updateGroceires={updateGroceires}
             />
           </div>
