@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useReducer } from "react";
 import "./Register.css";
 
 function Register({ changeLogged, switchRoute, updateUser }) {
@@ -9,8 +9,28 @@ function Register({ changeLogged, switchRoute, updateUser }) {
     password: "",
   });
 
+  const ACTIONS = {
+    NAME: "name",
+    EMAIL: "email",
+    PASSWORD: "password",
+    USER: "user",
+  };
+
+  function reducer(alert, action) {
+    switch (action.type) {
+      case ACTIONS.NAME:
+        return { name: true, email: false, password: false, user: false };
+      case ACTIONS.EMAIL:
+        return { name: false, email: true, password: false, user: false };
+      case ACTIONS.PASSWORD:
+        return { name: false, email: false, password: true, user: false };
+      case ACTIONS.USER:
+        return { name: false, email: false, password: false, user: true };
+    }
+  }
+
   //state for alerts
-  const [alert, setAlert] = useState({
+  const [alert, dispatch] = useReducer(reducer, {
     name: false,
     email: false,
     password: false,
@@ -34,13 +54,13 @@ function Register({ changeLogged, switchRoute, updateUser }) {
           updateUser(data);
           changeLogged();
         } else if (data === "name can not be empty") {
-          changeAlert("name");
+          dispatch({ type: ACTIONS.NAME });
         } else if (data === "not a proper email") {
-          changeAlert("email");
+          dispatch({ type: ACTIONS.EMAIL });
         } else if (data === "password has to be at least 6 characters long") {
-          changeAlert("password");
+          dispatch({ type: ACTIONS.PASSWORD });
         } else if (data.detail.includes("already exists")) {
-          changeAlert("user");
+          dispatch({ type: ACTIONS.USER });
         }
       })
       .catch((err) => console.log(err));
@@ -62,42 +82,6 @@ function Register({ changeLogged, switchRoute, updateUser }) {
     setInput((prevInput) => {
       return { ...prevInput, password: e.target.value };
     });
-  };
-
-  const changeAlert = function (type) {
-    if (type === "name") {
-      setAlert((prevAlert) => ({
-        ...prevAlert,
-        name: true,
-        email: false,
-        password: false,
-        user: false,
-      }));
-    } else if (type === "email") {
-      setAlert((prevAlert) => ({
-        ...prevAlert,
-        name: false,
-        email: true,
-        password: false,
-        user: false,
-      }));
-    } else if (type === "password") {
-      setAlert((prevAlert) => ({
-        ...prevAlert,
-        name: false,
-        email: false,
-        password: true,
-        user: false,
-      }));
-    } else if (type === "user") {
-      setAlert((prevAlert) => ({
-        ...prevAlert,
-        name: false,
-        email: false,
-        password: false,
-        user: true,
-      }));
-    }
   };
 
   return (
