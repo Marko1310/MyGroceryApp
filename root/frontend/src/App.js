@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import List from "./components/list/List";
-import Alert from "./components/alert/Alert";
+// import Alert from "./components/alert/Alert";
 import Navbar from "./components/navbar/Navbar";
 import Submit from "./components/submit/Submit";
 import Login from "./components/logIn/Login";
@@ -27,50 +27,21 @@ function App() {
   // state for grocerie list
   const [groceries, setGroceries] = useState([]);
 
-  //state for showing the alert
-  const [showAlert, setShowAlert] = useState(null);
+  // //state for showing the alert
+  // const [showAlert, setShowAlert] = useState(null);
 
   // function to update the input state field when entering the que
   const changeInput = function (e) {
     setInput(e.target.value);
   };
 
-  // function to update groceries state after every query
+  // function to update groceries state after every query to the database
   const updateGroceires = function () {
-    console.log("fetching");
-    console.log(user.id);
     fetch(`http://localhost:3001/profile/${user.id}`)
       .then((res) => res.json())
       .then((grocerieList) => {
-        console.log(grocerieList);
         setGroceries(grocerieList);
       });
-  };
-
-  // function to add groceries
-  const addGrocerie = function () {
-    // const id = Math.random();
-
-    if (input !== "") {
-      setShowAlert(false);
-      fetch(`http://localhost:3001/profile/${user.id}/newGrocerie`, {
-        method: "put",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          title: input,
-          date: new Date(),
-        }),
-      })
-        .then((response) => {
-          if (response) {
-            updateGroceires();
-          }
-        })
-        .catch((err) => console.log(err));
-    } else {
-      setShowAlert(true);
-    }
-    setInput("");
   };
 
   // function to remove all groceries
@@ -98,10 +69,10 @@ function App() {
     setGroceries(data);
   };
 
-  // function to remove alert
-  const removeALert = function () {
-    setShowAlert(false);
-  };
+  // // function to remove alert
+  // const removeALert = function () {
+  //   setShowAlert(false);
+  // };
 
   // function to change logged status
   const changeLogged = function () {
@@ -160,14 +131,10 @@ function App() {
         <div>
           <Navbar signout={signout} user={user} />
           <div className="main-container">
-            <div className="alert-container">
+            {/* <div className="alert-container">
               {showAlert && <Alert removeALert={removeALert} />}
-            </div>
-            <Submit
-              changeInput={changeInput}
-              addGrocerie={addGrocerie}
-              input={input}
-            />
+            </div> */}
+            <Submit updateGroceires={updateGroceires} user={user} />
             <List
               user={user}
               groceries={groceries}
