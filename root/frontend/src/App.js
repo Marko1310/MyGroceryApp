@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import List from "./components/list/List";
 import Alert from "./components/alert/Alert";
 import Navbar from "./components/navbar/Navbar";
@@ -11,7 +11,7 @@ function App() {
   const [logged, setLogged] = useState(false);
 
   // state for login or register
-  const [route, setRoute] = useState("register");
+  const [route, setRoute] = useState("login");
 
   // state for input field
   const [input, setInput] = useState("");
@@ -37,11 +37,13 @@ function App() {
 
   // function to update groceries state after every query
   const updateGroceires = function () {
+    console.log("fetching");
+    console.log(user.id);
     fetch(`http://localhost:3001/profile/${user.id}`)
       .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setGroceries(data);
+      .then((grocerieList) => {
+        console.log(grocerieList);
+        setGroceries(grocerieList);
       });
   };
 
@@ -117,7 +119,6 @@ function App() {
   const signout = function () {
     setLogged(false);
     setRoute("login");
-    console.log("aaa");
   };
 
   // function to update current user
@@ -126,9 +127,15 @@ function App() {
       id: data.id,
       name: data.name,
       email: data.email,
-      joined: new Date(),
     });
   };
+
+  // update user information after updateUser function sets user
+  useEffect(() => {
+    if (user.id !== "") {
+      updateGroceires();
+    }
+  }, [user]);
 
   return (
     <div>
@@ -144,6 +151,7 @@ function App() {
           switchRoute={switchRoute}
           changeLogged={changeLogged}
           updateUser={updateUser}
+          updateGroceires={updateGroceires}
         />
       )}
       {logged && (

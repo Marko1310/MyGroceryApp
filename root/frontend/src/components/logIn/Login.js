@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Login.css";
 
-function Login({ changeLogged, updateUser, switchRoute }) {
+function Login({ changeLogged, updateUser, switchRoute, updateGroceires }) {
   // state for input field
   const [input, setInput] = useState({
     email: "",
