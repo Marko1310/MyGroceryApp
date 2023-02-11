@@ -75,15 +75,17 @@ function App() {
 
   // function to remove all groceries
   const emptyList = function () {
-    fetch(`http://localhost:3001/profile/${user.id}/clearList`, {
-      method: "delete",
-    })
-      .then((response) => {
-        if (response) {
-          updateGroceires();
-        }
+    if (window.confirm("Are you sure you want to delete all the groceries?")) {
+      fetch(`http://localhost:3001/profile/${user.id}/clearList`, {
+        method: "delete",
       })
-      .catch((err) => console.log(err));
+        .then((response) => {
+          if (response) {
+            updateGroceires();
+          }
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   // function to delete item
