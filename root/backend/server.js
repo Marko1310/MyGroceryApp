@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -20,7 +22,7 @@ const pool = new Pool({
   database: "grocerie",
 });
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 app.use(cors());
 

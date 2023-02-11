@@ -30,7 +30,6 @@ function Register({ changeLogged, switchRoute, updateUser }) {
     })
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data.detail.includes("already exists"));
         if (data.id) {
           updateUser(data);
           changeLogged();
