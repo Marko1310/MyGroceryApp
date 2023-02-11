@@ -47,7 +47,6 @@
 .navbar-right {
   display: flex;
   flex-direction: row;
-  /* width: 30%; */
   margin-right: 0;
   gap: 1rem;
   align-items: center;

@@ -1,12 +1,7 @@
 import React, { useState, useRef } from "react";
 import "./GrocerieCard.css";
 
-const GrocerieCard = ({
-  eachGrocerie,
-  user,
-  deleteGrocerie,
-  updateGroceires,
-}) => {
+const GrocerieCard = ({ eachGrocerie, user, updateGroceires }) => {
   const [content, setContent] = useState(eachGrocerie.title);
   const [edit, setEdit] = useState(false);
   const input = useRef(null);

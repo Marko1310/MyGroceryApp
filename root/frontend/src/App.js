@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import List from "./components/list/List";
-// import Alert from "./components/alert/Alert";
 import Navbar from "./components/navbar/Navbar";
 import Submit from "./components/submit/Submit";
 import Login from "./components/logIn/Login";
@@ -34,11 +33,6 @@ function App() {
       .then((grocerieList) => {
         setGroceries(grocerieList);
       });
-  };
-
-  // function to edit grocerie list
-  const editGrocerieList = function (data) {
-    setGroceries(data);
   };
 
   // function to change logged status
@@ -91,7 +85,6 @@ function App() {
           switchRoute={switchRoute}
           changeLogged={changeLogged}
           updateUser={updateUser}
-          updateGroceires={updateGroceires}
         />
       )}
       {logged && (
@@ -102,7 +95,6 @@ function App() {
             <List
               user={user}
               groceries={groceries}
-              editGrocerieList={editGrocerieList}
               input={input}
               updateGroceires={updateGroceires}
             />

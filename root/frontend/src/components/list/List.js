@@ -2,13 +2,7 @@ import React from "react";
 import "./List.css";
 import GrocerieCard from "../grocerieCard/GrocerieCard";
 
-function List({
-  user,
-  groceries,
-  deleteGrocerie,
-  editGrocerieList,
-  updateGroceires,
-}) {
+function List({ user, groceries, deleteGrocerie, updateGroceires }) {
   // function to remove all groceries
   const emptyList = function () {
     if (window.confirm("Are you sure you want to delete all the groceries?")) {
@@ -33,7 +27,6 @@ function List({
             eachGrocerie={eachGrocerie}
             deleteGrocerie={deleteGrocerie}
             user={user}
-            editGrocerieList={editGrocerieList}
             updateGroceires={updateGroceires}
           />
         );
