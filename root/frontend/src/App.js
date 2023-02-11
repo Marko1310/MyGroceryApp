@@ -36,21 +36,6 @@ function App() {
       });
   };
 
-  // function to remove all groceries
-  const emptyList = function () {
-    if (window.confirm("Are you sure you want to delete all the groceries?")) {
-      fetch(`http://localhost:3001/profile/${user.id}/clearList`, {
-        method: "delete",
-      })
-        .then((response) => {
-          if (response) {
-            updateGroceires();
-          }
-        })
-        .catch((err) => console.log(err));
-    }
-  };
-
   // function to edit grocerie list
   const editGrocerieList = function (data) {
     setGroceries(data);
@@ -117,7 +102,6 @@ function App() {
             <List
               user={user}
               groceries={groceries}
-              emptyList={emptyList}
               editGrocerieList={editGrocerieList}
               input={input}
               updateGroceires={updateGroceires}
