@@ -14,6 +14,7 @@ function Register({ changeLogged, switchRoute, updateUser }) {
     name: false,
     email: false,
     password: false,
+    user: false,
   });
 
   const register = function (event) {
@@ -29,6 +30,7 @@ function Register({ changeLogged, switchRoute, updateUser }) {
     })
       .then((response) => response.json())
       .then((data) => {
+        // console.log(data.detail.includes("already exists"));
         if (data.id) {
           updateUser(data);
           changeLogged();
@@ -38,6 +40,8 @@ function Register({ changeLogged, switchRoute, updateUser }) {
           changeAlert("email");
         } else if (data === "password has to be at least 6 characters long") {
           changeAlert("password");
+        } else if (data.detail.includes("already exists")) {
+          changeAlert("user");
         }
       })
       .catch((err) => console.log(err));
@@ -68,6 +72,7 @@ function Register({ changeLogged, switchRoute, updateUser }) {
         name: true,
         email: false,
         password: false,
+        user: false,
       }));
     } else if (type === "email") {
       setAlert((prevAlert) => ({
@@ -75,6 +80,7 @@ function Register({ changeLogged, switchRoute, updateUser }) {
         name: false,
         email: true,
         password: false,
+        user: false,
       }));
     } else if (type === "password") {
       setAlert((prevAlert) => ({
@@ -82,6 +88,15 @@ function Register({ changeLogged, switchRoute, updateUser }) {
         name: false,
         email: false,
         password: true,
+        user: false,
+      }));
+    } else if (type === "user") {
+      setAlert((prevAlert) => ({
+        ...prevAlert,
+        name: false,
+        email: false,
+        password: false,
+        user: true,
       }));
     }
   };
@@ -91,6 +106,9 @@ function Register({ changeLogged, switchRoute, updateUser }) {
       <form onSubmit={register} className="form-validate">
         <p className="title">SIGN UP</p>
         <label htmlFor="name"></label>
+        {alert.user && (
+          <p className="register-alert user">User already exists, log in? </p>
+        )}
         <input
           onChange={changeName}
           className="forms"

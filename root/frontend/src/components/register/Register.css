@@ -98,3 +98,8 @@ body {
   font-size: small;
   margin-right: auto;
 }
+
+.user {
+  margin-right: 0;
+  margin-bottom: 0.2rem;
+}
