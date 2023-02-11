@@ -9,6 +9,8 @@ const login = require("./controllers/login");
 const getGroceries = require("./controllers/getGroceries");
 const newGrocerie = require("./controllers/newGrocerie");
 const editGrocerie = require("./controllers/editGrocerie");
+const deleteGrocerie = require("./controllers/deleteGrocerie");
+const clearGroceries = require("./controllers/clearGroceries");
 
 const pool = new Pool({
   host: "127.0.0.1",
@@ -55,33 +57,11 @@ app.put("/profile/:id/editgrocerie", (req, res) =>
 );
 
 //route to delete specific grocerie
-app.delete("/profile/:id/delete", (req, res) => {
-  const { grocerie_id } = req.body;
-
-  // let found = false;
-
-  pool
-    .query('DELETE FROM "groceries" WHERE "id" = $1;', [grocerie_id])
-    .then(() => {
-      res.status(200).json();
-    })
-    .catch((err) => console.log(err));
-  // if (!found) {
-  //   res.status(404).json("no such user");
-  // }
-});
+app.delete("/profile/:id/delete", (req, res) =>
+  deleteGrocerie.handleDelete(req, res, pool)
+);
 
 //route to clear the list
-app.delete("/profile/:id/clearList", (req, res) => {
-  const { id } = req.params;
-
-  // let found = false;
-  pool
-    .query("DELETE FROM groceries WHERE user_id = $1", [id])
-    .then(() => res.status(200).json())
-    .catch((err) => console.log(err));
-
-  // if (!found) {
-  //   res.status(404).json("no such user");
-  // }
-});
+app.delete("/profile/:id/clearList", (req, res) =>
+  clearGroceries.handleClearGroceries(req, res, pool)
+);
