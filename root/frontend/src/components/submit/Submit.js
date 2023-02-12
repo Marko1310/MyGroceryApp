@@ -18,6 +18,7 @@ function Submit({ updateGroceires, user }) {
     fetch(`http://localhost:3001/profile/${user.id}/history/`)
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         updateHistoryState(data);
       });
   };
@@ -74,6 +75,7 @@ function Submit({ updateGroceires, user }) {
             .filter((el) => {
               const searchTerm = input.toLowerCase();
               const grocerie = el.title.toLowerCase();
+              console.log();
 
               return (
                 searchTerm &&
