@@ -8,19 +8,12 @@ const handleNewGrocerie = (req, res, pool) => {
       id,
       date,
     ])
-    .then(() => {
-      pool
-        .query("SELECT * FROM history WHERE user_id = $1", [id])
-        .then((data) => {
-          console.log(data);
-          if (data.rows.length === 0) {
-            pool.query(
-              "INSERT INTO history (title, user_id) VALUES ($1, $2))",
-              [title, id]
-            );
-          }
-        });
-    })
+    .then(() =>
+      pool.query("INSERT INTO history (title, user_id) VALUES ($1, $2)", [
+        title,
+        id,
+      ])
+    )
     .then(() => {
       return res.status(200).json();
     })
@@ -31,3 +24,12 @@ const handleNewGrocerie = (req, res, pool) => {
 module.exports = {
   handleNewGrocerie: handleNewGrocerie,
 };
+
+// pool
+//   .query("SELECT * FROM history WHERE user_id = $1", [id])
+//   .then((data) => {
+//     console.log(data);
+//     if (data.rows.length === 0) {
+
+// }
+// });
