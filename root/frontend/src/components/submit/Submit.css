@@ -10,17 +10,15 @@
 
 .submit-input-field {
   height: 2.5rem;
-  width: 90%;
-  padding: 0.25rem;
-  padding-left: 1rem;
+  width: 100%;
   background: var(--clr-grey-10);
   font-size: 1rem;
-  flex: 1 0 auto;
   color: var(--clr-grey-5);
+  align-items: center;
 }
 
 .submit-input {
-  height: 2rem;
+  height: 100%;
   width: 100%;
   padding-left: 1rem;
   background: var(--clr-grey-10);
@@ -28,9 +26,7 @@
   border-bottom-left-radius: var(--radius);
   border-color: transparent;
   font-size: 1rem;
-  flex: 1 0 auto;
   color: var(--clr-grey-5);
-  margin-bottom: 1rem;
 }
 
 .submit-edit {
@@ -99,9 +95,16 @@
 
 .list {
   display: flex;
+  width: 100%;
   padding: 0.5rem;
   flex-direction: column;
-  background: white;
-  border-color: black;
+  background: var(--clr-grey-10);
   padding-left: 0.5rem;
+  color: rgb(80, 78, 78);
+  /* border-style: solid; */
+}
+
+.list:hover {
+  background: var(--clr-primary-5);
+  color: var(--clr-white);
 }
