@@ -48,6 +48,11 @@ app.get("/profile/:id", (req, res) =>
   getGroceries.handleGetGroceries(req, res, pool)
 );
 
+// route to get all groceries history from user
+app.get("/profile/:id/history", (req, res) =>
+  getGroceries.handleGetHistory(req, res, pool)
+);
+
 //route to add new grocerie
 app.put("/profile/:id/newGrocerie", (req, res) =>
   newGrocerie.handleNewGrocerie(req, res, pool)

@@ -5,10 +5,20 @@ import "./Submit.css";
 function Submit({ updateGroceires, user }) {
   // state for input field
   const [input, setInput] = useState("");
+  const [history, setHistory] = useState([]);
 
   // function to update the input state field when entering the que
   const changeInput = function (e) {
     setInput(e.target.value);
+  };
+
+  const updateHistory = function () {
+    fetch(`http://localhost:3001/profile/${user.id}/history/`)
+      .then((res) => res.json())
+      .then((historyList) => {
+        const groceries = historyList.map((el) => el.title);
+        setHistory(groceries);
+      });
   };
 
   // function to add grocerie
@@ -24,6 +34,7 @@ function Submit({ updateGroceires, user }) {
       .then((response) => {
         if (response) {
           updateGroceires();
+          updateHistory();
         }
       })
       .catch((err) => console.log(err));
