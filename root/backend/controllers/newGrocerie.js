@@ -8,17 +8,25 @@ const handleNewGrocerie = (req, res, pool) => {
       id,
       date,
     ])
-    .then(() =>
-      pool.query("INSERT INTO history (title, user_id) VALUES ($1, $2)", [
-        title,
-        id,
-      ])
-    )
+    .then(() => {
+      pool
+        .query("SELECT * FROM history WHERE title = $1 AND user_id = $2", [
+          title,
+          id,
+        ])
+        .then((data) => {
+          if (data.rows.length > 0) {
+            pool.query(
+              "INSERT INTO history (title, user_id) VALUES ($1, $2))",
+              [title, id]
+            );
+          } else (err) => console.log(err);
+        });
+    })
     .then(() => {
       return res.status(200).json();
     })
     .catch((err) => res.json(err));
-
   //also insert into history groceries table
 };
 
