@@ -30,6 +30,16 @@ function Submit({ updateGroceires, user }) {
     setInput("");
   };
 
+  const groceries = [
+    "apple",
+    "banana",
+    "berry",
+    "basmati",
+    "apricot",
+    "water",
+    "milk",
+  ];
+
   return (
     <form
       className="submit-container"
@@ -38,15 +48,24 @@ function Submit({ updateGroceires, user }) {
         addGrocerie();
       }}
     >
-      <input
-        type="text"
-        id="grocery"
-        name="grocery"
-        placeholder="e.g. banana"
-        value={input}
-        className="submit-input"
-        onChange={(e) => changeInput(e)}
-      ></input>
+      <div className="submit-input-field">
+        <input
+          type="text"
+          id="grocery"
+          name="grocery"
+          placeholder="e.g. banana"
+          value={input}
+          className="submit-input"
+          onChange={(e) => changeInput(e)}
+        ></input>
+        <div>
+          {groceries
+            .filter((el) => el.startsWith(input))
+            .map((el) => (
+              <div className="list">{el}</div>
+            ))}
+        </div>
+      </div>
       <input
         type="submit"
         value="Submit"
