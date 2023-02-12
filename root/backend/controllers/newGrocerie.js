@@ -34,12 +34,3 @@ const handleNewGrocerie = (req, res, pool) => {
 module.exports = {
   handleNewGrocerie: handleNewGrocerie,
 };
-
-// pool
-//   .query("SELECT * FROM history WHERE user_id = $1", [id])
-//   .then((data) => {
-//     console.log(data);
-//     if (data.rows.length === 0) {
-
-// }
-// });
