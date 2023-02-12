@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import "./Submit.css";
 
@@ -12,6 +12,8 @@ function Submit({ updateGroceires, user }) {
     setInput(e.target.value);
   };
 
+  useEffect(() => updateHistory(), []);
+
   const updateHistory = function () {
     fetch(`http://localhost:3001/profile/${user.id}/history/`)
       .then((res) => res.json())
@@ -21,7 +23,9 @@ function Submit({ updateGroceires, user }) {
   };
 
   const updateHistoryState = function (historyList) {
-    const groceries = historyList.map((el) => el.title);
+    const groceries = historyList.map((el) => {
+      return el;
+    });
     setHistory(groceries);
   };
 
@@ -36,10 +40,8 @@ function Submit({ updateGroceires, user }) {
       }),
     })
       .then((response) => {
-        if (response) {
-          updateGroceires();
-          updateHistory();
-        }
+        updateGroceires();
+        updateHistory();
       })
       .catch((err) => console.log(err));
     setInput("");
@@ -47,7 +49,6 @@ function Submit({ updateGroceires, user }) {
 
   const onSearch = (searchTerm) => {
     setInput(searchTerm);
-    // setInput("");
   };
 
   return (
@@ -72,7 +73,8 @@ function Submit({ updateGroceires, user }) {
           {history
             .filter((el) => {
               const searchTerm = input.toLowerCase();
-              const grocerie = el.toLowerCase();
+              const grocerie = el.title.toLowerCase();
+
               return (
                 searchTerm &&
                 grocerie.startsWith(searchTerm) &&
@@ -81,11 +83,11 @@ function Submit({ updateGroceires, user }) {
             })
             .map((grocerie) => (
               <div
-                key={grocerie}
+                key={grocerie.id}
                 className="list"
-                onClick={() => onSearch(grocerie)}
+                onClick={() => onSearch(grocerie.title)}
               >
-                {grocerie}
+                {grocerie.title}
               </div>
             ))}
         </div>

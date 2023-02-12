@@ -14,7 +14,6 @@ const handleGetHistory = (req, res, pool) => {
     .query("SELECT * FROM history WHERE user_id = $1", [id])
     .then((history) => {
       res.json(history.rows);
-      console.log(history.rows);
     })
     .catch((err) => res.status(400).json(err));
 };

@@ -7,7 +7,7 @@ import Register from "./components/register/Register";
 
 function App() {
   // state for logged in
-  const [logged, setLogged] = useState(true);
+  const [logged, setLogged] = useState(false);
 
   // state for login or register
   const [route, setRoute] = useState("login");
