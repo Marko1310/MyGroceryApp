@@ -8,17 +8,27 @@ const handleNewGrocerie = (req, res, pool) => {
       id,
       date,
     ])
+
+    //also insert into history groceries table if it does not exist
     .then(() =>
-      pool.query("INSERT INTO history (title, user_id) VALUES ($1, $2)", [
-        title,
-        id,
-      ])
+      pool
+        .query("SELECT * FROM history WHERE user_id = $1 AND title = $2", [
+          id,
+          title,
+        ])
+        .then((data) => {
+          if (data.rows.length === 0) {
+            return pool.query(
+              "INSERT INTO history (title, user_id) VALUES ($1, $2)",
+              [title, id]
+            );
+          }
+        })
     )
     .then(() => {
       return res.status(200).json();
     })
     .catch((err) => res.json(err));
-  //also insert into history groceries table
 };
 
 module.exports = {
