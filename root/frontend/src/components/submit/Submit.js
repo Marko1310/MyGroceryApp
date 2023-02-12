@@ -35,7 +35,7 @@ function Submit({ updateGroceires, user }) {
     "banana",
     "berry",
     "basmati",
-    "apricot",
+    "apricotaaaaaaaa",
     "water",
     "milk",
   ];
@@ -58,7 +58,7 @@ function Submit({ updateGroceires, user }) {
           className="submit-input"
           onChange={(e) => changeInput(e)}
         ></input>
-        <div>
+        <div className="list-container">
           {groceries
             .filter((el) => el.startsWith(input))
             .map((el) => (
