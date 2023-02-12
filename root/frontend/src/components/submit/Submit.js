@@ -15,10 +15,14 @@ function Submit({ updateGroceires, user }) {
   const updateHistory = function () {
     fetch(`http://localhost:3001/profile/${user.id}/history/`)
       .then((res) => res.json())
-      .then((historyList) => {
-        const groceries = historyList.map((el) => el.title);
-        setHistory(groceries);
+      .then((data) => {
+        updateHistoryState(data);
       });
+  };
+
+  const updateHistoryState = function (historyList) {
+    const groceries = historyList.map((el) => el.title);
+    setHistory(groceries);
   };
 
   // function to add grocerie
@@ -41,15 +45,10 @@ function Submit({ updateGroceires, user }) {
     setInput("");
   };
 
-  const groceries = [
-    "apple",
-    "banana",
-    "berry",
-    "basmati",
-    "apricotaaaaaaaa",
-    "water",
-    "milk",
-  ];
+  const onSearch = (searchTerm) => {
+    setInput(searchTerm);
+    // setInput("");
+  };
 
   return (
     <form
@@ -70,10 +69,24 @@ function Submit({ updateGroceires, user }) {
           onChange={(e) => changeInput(e)}
         ></input>
         <div className="list-container">
-          {groceries
-            .filter((el) => el.startsWith(input))
-            .map((el) => (
-              <div className="list">{el}</div>
+          {history
+            .filter((el) => {
+              const searchTerm = input.toLowerCase();
+              const grocerie = el.toLowerCase();
+              return (
+                searchTerm &&
+                grocerie.startsWith(searchTerm) &&
+                grocerie !== searchTerm
+              );
+            })
+            .map((grocerie) => (
+              <div
+                key={grocerie}
+                className="list"
+                onClick={() => onSearch(grocerie)}
+              >
+                {grocerie}
+              </div>
             ))}
         </div>
       </div>

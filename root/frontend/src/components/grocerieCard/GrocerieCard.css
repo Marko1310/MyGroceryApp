@@ -3,7 +3,7 @@
   flex-direction: row;
   width: 100%;
   justify-content: space-between;
-  margin-top: 1rem;
+  margin-top: 0rem;
   transition: var(--transition);
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;

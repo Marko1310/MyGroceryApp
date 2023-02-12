@@ -23,33 +23,6 @@
   max-width: 30rem;
 }
 
-.grocery-list {
-  display: flex;
-  flex-direction: column;
-  margin-top: 2rem;
-  width: 100%;
-}
-
-.grocery-list-item {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  justify-content: space-between;
-  margin-top: 1rem;
-  transition: var(--transition);
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-
-.grocery-list-item:hover {
-  color: var(--clr-grey-5);
-  cursor: default;
-}
-
-.grocery-list-item:hover .title {
-  color: var(--clr-grey-5);
-}
-
 .clear-btn {
   text-transform: capitalize;
   height: 1.5rem;
