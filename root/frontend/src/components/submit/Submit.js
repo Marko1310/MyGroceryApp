@@ -91,13 +91,7 @@ function Submit({ updateGroceires, user }) {
             ))}
         </div>
       </div>
-      <button
-        onClick={(e) => submitForm(e)}
-        // type="submit"
-        // value="Submit"
-        className="submit-btn"
-        disabled={input === ""}
-      >
+      <button className="submit-btn" disabled={input === ""}>
         Submit
       </button>
     </form>
