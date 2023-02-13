@@ -33,7 +33,7 @@ function Submit({ updateGroceires, user }) {
   const addGrocerie = function (event) {
     event.preventDefault();
     fetch(`http://localhost:3001/profile/${user.id}/newGrocerie`, {
-      method: "put",
+      method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         title: input,

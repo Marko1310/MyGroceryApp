@@ -55,7 +55,7 @@ app.get("/profile/:id/history", (req, res) =>
 );
 
 //route to add new grocerie
-app.put("/profile/:id/newGrocerie", (req, res) =>
+app.post("/profile/:id/newGrocerie", (req, res) =>
   newGrocerie.handleNewGrocerie(req, res, pool)
 );
 
