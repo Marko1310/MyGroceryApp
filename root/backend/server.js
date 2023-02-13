@@ -1,4 +1,7 @@
-// require("dotenv").config();
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
+console.log(process.env.FOO);
 
 const express = require("express");
 const app = express();
@@ -15,11 +18,11 @@ const deleteGrocerie = require("./controllers/deleteGrocerie");
 const clearGroceries = require("./controllers/clearGroceries");
 
 const pool = new Pool({
-  host: "127.0.0.1",
-  port: 5432,
-  user: "marko",
-  password: "",
-  database: "grocerie",
+  host: process.env.HOST,
+  port: process.env.DB_PORT,
+  user: process.env.USER,
+  password: process.env.PASSWORD,
+  database: process.env.DATABASE,
 });
 
 const PORT = process.env.PORT || 3001;
