@@ -1,4 +1,4 @@
-/backend/.env 
+/backend/db.config.js
 /backend/node_modules
 /frontend/node_modules
 /node_modules

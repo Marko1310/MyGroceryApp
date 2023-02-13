@@ -1,8 +1,4 @@
-if (process.env.NODE_ENV !== "production") {
-  require("dotenv").config();
-}
-console.log(process.env.FOO);
-
+const config = require("./db.config");
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -18,11 +14,11 @@ const deleteGrocerie = require("./controllers/deleteGrocerie");
 const clearGroceries = require("./controllers/clearGroceries");
 
 const pool = new Pool({
-  host: process.env.HOST,
-  port: process.env.DB_PORT,
-  user: process.env.USER,
-  password: process.env.PASSWORD,
-  database: process.env.DATABASE,
+  host: config.HOST,
+  port: config.PORT,
+  user: config.USER,
+  password: config.PASSWORD,
+  database: config.DATABASE,
 });
 
 const PORT = process.env.PORT || 3001;
