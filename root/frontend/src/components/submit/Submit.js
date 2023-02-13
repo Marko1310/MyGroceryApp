@@ -57,7 +57,7 @@ function Submit({ updateGroceires, user }) {
   }
 
   return (
-    <form className="submit-container" onSubmit={(e) => submitForm(e)}>
+    <form className="submit-container" onSubmit={submitForm}>
       <div className="submit-input-field">
         <input
           type="text"
