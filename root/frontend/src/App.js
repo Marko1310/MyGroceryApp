@@ -28,7 +28,7 @@ function App() {
 
   // function to update groceries state after every query to the database
   const updateGroceires = function () {
-    fetch(`http://localhost:3001/profile/${user.id}`)
+    fetch(`https://mygrocerieapp-api.onrender.com/profile/${user.id}`)
       .then((res) => res.json())
       .then((grocerieList) => {
         setGroceries(grocerieList);

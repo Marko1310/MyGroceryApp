@@ -15,7 +15,7 @@ function Submit({ updateGroceires, user }) {
   useEffect(() => updateHistory(), []);
 
   const updateHistory = function () {
-    fetch(`http://localhost:3001/profile/${user.id}/history/`)
+    fetch(`https://mygrocerieapp-api.onrender.com/profile/${user.id}/history/`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

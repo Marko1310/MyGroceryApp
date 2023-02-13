@@ -13,7 +13,7 @@ const GrocerieCard = ({ eachGrocerie, user, updateGroceires }) => {
       setContent("");
     } else {
       if (content === "") setContent(eachGrocerie.title);
-      fetch(`http://localhost:3001/profile/${user.id}/editgrocerie`, {
+      fetch(`https://mygrocerieapp-api.onrender.com/${user.id}/editgrocerie`, {
         method: "put",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({ title: content, grocerie_id: eachGrocerie.id }),
@@ -28,7 +28,7 @@ const GrocerieCard = ({ eachGrocerie, user, updateGroceires }) => {
   };
 
   const deleteCard = function () {
-    fetch(`http://localhost:3001/profile/${user.id}/delete`, {
+    fetch(`https://mygrocerieapp-api.onrender.com/profile/${user.id}/delete`, {
       method: "delete",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ grocerie_id: eachGrocerie.id }),

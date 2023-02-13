@@ -44,7 +44,7 @@ function Login({ changeLogged, updateUser, switchRoute }) {
 
   const login = function (event) {
     event.preventDefault();
-    fetch("http://localhost:3001/login", {
+    fetch("https://mygrocerieapp-api.onrender.com/login", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
