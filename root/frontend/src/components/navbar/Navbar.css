@@ -20,7 +20,7 @@
 
 .navbar-title {
   color: var(--clr-black);
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: 400;
   margin-bottom: 0;
   padding-right: 2rem;
@@ -38,7 +38,7 @@
 .navbar-name {
   color: black;
   margin: 0;
-  font-size: larger;
+  font-size: 1rem;
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
@@ -46,7 +46,8 @@
 
 .navbar-right {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: center;
   margin-right: 0;
   gap: 1rem;
   align-items: center;
