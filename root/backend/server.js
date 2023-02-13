@@ -1,4 +1,5 @@
-const config = require("./db.config");
+require("dotenv").config();
+
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -14,11 +15,11 @@ const deleteGrocerie = require("./controllers/deleteGrocerie");
 const clearGroceries = require("./controllers/clearGroceries");
 
 const pool = new Pool({
-  host: config.HOST,
-  port: config.PORT,
-  user: config.USER,
-  password: config.PASSWORD,
-  database: config.DATABASE,
+  host: process.env.HOST,
+  port: process.env.DB_PORT,
+  user: process.env.USER,
+  password: process.env.PASSWORD,
+  database: process.env.DATABASE,
   ssl: true,
 });
 
