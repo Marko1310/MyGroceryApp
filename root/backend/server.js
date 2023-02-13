@@ -60,7 +60,7 @@ app.post("/profile/:id/newGrocerie", (req, res) =>
 );
 
 //route to edit grocerie
-app.put("/profile/:id/editgrocerie", (req, res) =>
+app.post("/profile/:id/editgrocerie", (req, res) =>
   editGrocerie.handleEditGrocerie(req, res, pool)
 );
 

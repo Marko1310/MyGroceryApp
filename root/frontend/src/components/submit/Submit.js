@@ -33,6 +33,7 @@ function Submit({ updateGroceires, user }) {
   const addGrocerie = function (event) {
     event.preventDefault();
     fetch(`http://localhost:3001/profile/${user.id}/newGrocerie`, {
+      // method: "put",--> SO MOBILE VERSION CAN WORK, RETURN FOR DESKTOP
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

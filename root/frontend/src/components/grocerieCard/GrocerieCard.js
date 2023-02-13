@@ -14,7 +14,8 @@ const GrocerieCard = ({ eachGrocerie, user, updateGroceires }) => {
     } else {
       if (content === "") setContent(eachGrocerie.title);
       fetch(`https://mygrocerieapp-api.onrender.com/${user.id}/editgrocerie`, {
-        method: "put",
+        // method: "put", --> SO MOBILE VERSION CAN WORK, RETURN FOR DESKTOP
+        method: "post",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({ title: content, grocerie_id: eachGrocerie.id }),
       })
