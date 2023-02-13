@@ -22,15 +22,6 @@ const pool = new Pool({
   ssl: true,
 });
 
-// const connection = `postgresql://${config.USER}:${config.PASSWORD}@${config.HOST}:${config.PORT}/${config.DATABASE}`;
-pool.connect((err, client, release) => {
-  if (err) {
-    return console.error("Error acquiring client", err.stack);
-  }
-  // Do what you have to do with the pool client now
-});
-// console.log(pool);
-
 const PORT = process.env.PORT || 3001;
 
 app.use(cors());
