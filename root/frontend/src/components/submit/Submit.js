@@ -30,7 +30,8 @@ function Submit({ updateGroceires, user }) {
   };
 
   // function to add grocerie
-  const addGrocerie = function () {
+  const addGrocerie = function (event) {
+    event.preventDefault();
     fetch(`http://localhost:3001/profile/${user.id}/newGrocerie`, {
       method: "put",
       headers: { "Content-Type": "application/json" },
@@ -50,11 +51,6 @@ function Submit({ updateGroceires, user }) {
   const onSearch = (searchTerm) => {
     setInput(searchTerm);
   };
-
-  // const submitForm = function (event) {
-  //   event.preventDefault();
-  //   addGrocerie();
-  // }
 
   return (
     <form className="submit-container" onSubmit={addGrocerie}>
