@@ -18,7 +18,6 @@ function Submit({ updateGroceires, user }) {
     fetch(`https://mygrocerieapp-api.onrender.com/profile/${user.id}/history/`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         updateHistoryState(data);
       });
   };
@@ -52,13 +51,18 @@ function Submit({ updateGroceires, user }) {
     setInput(searchTerm);
   };
 
+  function submitForm(e) {
+    e.preventDefault();
+    addGrocerie();
+  }
+
   return (
     <form
       className="submit-container"
-      onSubmit={(e) => {
-        e.preventDefault();
-        addGrocerie();
-      }}
+      // onSubmit={(e) => {
+      //   e.preventDefault();
+      //   addGrocerie();
+      // }}
     >
       <div className="submit-input-field">
         <input
@@ -75,7 +79,6 @@ function Submit({ updateGroceires, user }) {
             .filter((el) => {
               const searchTerm = input.toLowerCase();
               const grocerie = el.title.toLowerCase();
-              console.log();
 
               return (
                 searchTerm &&
@@ -99,6 +102,7 @@ function Submit({ updateGroceires, user }) {
         value="Submit"
         className="submit-btn"
         disabled={input === ""}
+        onClick={(e) => submitForm(e)}
       ></input>
     </form>
   );
