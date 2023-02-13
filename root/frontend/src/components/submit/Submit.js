@@ -57,7 +57,7 @@ function Submit({ updateGroceires, user }) {
   }
 
   return (
-    <form className="submit-container">
+    <form className="submit-container" onSubmit={(e) => submitForm(e)}>
       <div className="submit-input-field">
         <input
           type="text"
@@ -91,13 +91,15 @@ function Submit({ updateGroceires, user }) {
             ))}
         </div>
       </div>
-      <input
+      <button
         onClick={(e) => submitForm(e)}
         // type="submit"
-        value="Submit"
+        // value="Submit"
         className="submit-btn"
         disabled={input === ""}
-      ></input>
+      >
+        Submit
+      </button>
     </form>
   );
 }
