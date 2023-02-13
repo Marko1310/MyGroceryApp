@@ -7,7 +7,7 @@ const GrocerieCard = ({ eachGrocerie, user, updateGroceires }) => {
   const input = useRef(null);
 
   const changeContent = function () {
-    // input.current.focus();
+    // input.current.focus(); --> SO MOBILE VERSION CAN WORK, RETURN FOR DESKTOP
     setEdit(edit ? false : true);
     if (!edit) {
       setContent("");

@@ -41,8 +41,10 @@ function Submit({ updateGroceires, user }) {
       }),
     })
       .then((response) => {
-        updateGroceires();
-        updateHistory();
+        if (response.status === 200) {
+          updateGroceires();
+          updateHistory();
+        }
       })
       .catch((err) => console.log(err));
     setInput("");
