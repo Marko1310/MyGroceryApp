@@ -7,7 +7,7 @@ const GrocerieCard = ({ eachGrocerie, user, updateGroceires }) => {
   const input = useRef(null);
 
   const changeContent = function () {
-    input.current.focus();
+    // input.current.focus();
     setEdit(edit ? false : true);
     if (!edit) {
       setContent("");
