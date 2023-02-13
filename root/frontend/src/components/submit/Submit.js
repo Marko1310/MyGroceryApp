@@ -32,15 +32,18 @@ function Submit({ updateGroceires, user }) {
   // function to add grocerie
   const addGrocerie = function (event) {
     event.preventDefault();
-    fetch(`http://localhost:3001/profile/${user.id}/newGrocerie`, {
-      // method: "put",--> SO MOBILE VERSION CAN WORK, RETURN FOR DESKTOP
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        title: input,
-        date: new Date(),
-      }),
-    })
+    fetch(
+      `https://mygrocerieapp-api.onrender.com/profile/${user.id}/newGrocerie`,
+      {
+        // method: "put",--> SO MOBILE VERSION CAN WORK, RETURN FOR DESKTOP
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: input,
+          date: new Date(),
+        }),
+      }
+    )
       .then((response) => {
         if (response.status === 200) {
           updateGroceires();

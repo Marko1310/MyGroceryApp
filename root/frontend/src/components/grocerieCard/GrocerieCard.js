@@ -13,12 +13,18 @@ const GrocerieCard = ({ eachGrocerie, user, updateGroceires }) => {
       setContent("");
     } else {
       if (content === "") setContent(eachGrocerie.title);
-      fetch(`https://mygrocerieapp-api.onrender.com/${user.id}/editgrocerie`, {
-        // method: "put", --> SO MOBILE VERSION CAN WORK, RETURN FOR DESKTOP
-        method: "post",
-        headers: { "Content-type": "application/json" },
-        body: JSON.stringify({ title: content, grocerie_id: eachGrocerie.id }),
-      })
+      fetch(
+        `https://mygrocerieapp-api.onrender.com/profile/${user.id}/editgrocerie`,
+        {
+          // method: "put", --> SO MOBILE VERSION CAN WORK, RETURN FOR DESKTOP
+          method: "post",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify({
+            title: content,
+            grocerie_id: eachGrocerie.id,
+          }),
+        }
+      )
         .then((response) => {
           if (response) {
             updateGroceires();
