@@ -51,13 +51,13 @@ function Submit({ updateGroceires, user }) {
     setInput(searchTerm);
   };
 
-  function submitForm(e) {
-    e.preventDefault();
-    addGrocerie();
-  }
+  // const submitForm = function (event) {
+  //   event.preventDefault();
+  //   addGrocerie();
+  // }
 
   return (
-    <form className="submit-container" onSubmit={submitForm}>
+    <form className="submit-container" onSubmit={addGrocerie}>
       <div className="submit-input-field">
         <input
           type="text"
